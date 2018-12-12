@@ -8,7 +8,6 @@ pure virtual moveFormat - the way the piece is allowed to move by the game rules
             
 Board's Methods:
 isValidRange - checks if the coordinations are inside the game board
-isValidMove - 
 pieceExists - checks if the current player has a piece in the source tile
 noPiece - checks if the destination location has no current player piece
 isReachable - checks if the piece can move to destination

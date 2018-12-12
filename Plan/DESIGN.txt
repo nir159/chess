@@ -2,8 +2,20 @@ Classes:
 	Parent:	pure virual - Piece
 		children: King, Queen, Rook	, Bishop, Knight, Pawn
 	Class: Board
-	
-Piece's Methods: pure virtual - moveFormat,
-	            
-Board's Methods: isValidRange, isValidMove, pieceExists, noPiece, isReachable, isSelfChess, isChess, eat, makeMove, isSame
-Board's Fields: std::string board, 
+
+Piece's Methods: 
+pure virtual moveFormat - the way the piece is allowed to move by the game rules
+            
+Board's Methods:
+isValidRange - checks if the coordinations are inside the game board
+isValidMove - 
+pieceExists - checks if the current player has a piece in the source tile
+noPiece - checks if the destination location has no current player piece
+isReachable - checks if the piece can move to destination
+isSelfChess - checks if the move creates a chess on the current user
+isChess - checks if the move creates chess on the opponent
+eat - checks if opponent piece exists in the destination. if true removes the piece
+isSame - checks if destination and source is the same
+makeMove - gets the string from frontend and returns a number represent the result
+Board's Fields:
+board - std::string

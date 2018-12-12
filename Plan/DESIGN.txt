@@ -1,0 +1,9 @@
+Classes:
+	Parent:	pure virual - Piece
+		children: King, Queen, Rook	, Bishop, Knight, Pawn
+	Class: Board
+	
+Piece's Methods: pure virtual - moveFormat,
+	            
+Board's Methods: isValidRange, isValidMove, pieceExists, noPiece, isReachable, isSelfChess, isChess, eat, makeMove, isSame
+Board's Fields: std::string board, 

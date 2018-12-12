@@ -1,6 +1,6 @@
 Classes:
 	Parent:	pure virual - Piece
-		children: King, Queen, Rook	, Bishop, Knight, Pawn
+		children: King, Queen, Rook	, Bishop, Knight, Pawn, Blank
 	Class: Board
 
 Piece's Methods: 
@@ -22,4 +22,4 @@ Board's Methods:
 	makeMove - gets the string from frontend and returns a number represent the result
 
 Board's Fields:
-	board - std::string
+	board - Piece*[8][8]

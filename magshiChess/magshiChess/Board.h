@@ -23,7 +23,7 @@ public:
 	void isSelfChess();
 	void isChess();
 	void eat();
-	void isSame();
+	bool isSame() const;
 	void makeMove();
 	~Board();
 };

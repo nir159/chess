@@ -24,3 +24,10 @@ bool Board::isValidRange() const {
 	}
 	return false;
 }
+
+bool Board::isSame() const {
+	if (_instruction[FIRST] == _instruction[THIRD] && _instruction[SECOND] == _instruction[FORTH]) {
+		return true;
+	}
+	return false;
+}

@@ -10,6 +10,7 @@ private:
 	Piece* Pieces[SIDE_OF_BOARD][SIDE_OF_BOARD];
 public:
 	Board();
+	void isValidRange();
 	~Board();
 };
 

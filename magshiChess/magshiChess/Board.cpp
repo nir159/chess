@@ -3,6 +3,7 @@
 
 Board::Board()
 {
+	// if (str.length() == INSTRUCTION_LEN)
 }
 
 
@@ -10,8 +11,15 @@ Board::~Board()
 {
 }
 
-bool Board::isValidRange(std::string str) const {
-	if (str.length() == INSTRUCTION_LEN && SideFunctions::isCharInstructionValid(str[FIRST]) && SideFunctions::isNumInstructionValid(str[SECOND]) && SideFunctions::isCharInstructionValid(str[THIRD]) && SideFunctions::isNumInstructionValid(str[FORTH])) {
+/*
+function will check if Instuction is in the correct format and the parameters in it are in the valid range
+Input:
+	[Void]
+Output:
+	if Instuction is in the correct format and the parameters in it are in the valid range then return true, else return false
+*/
+bool Board::isValidRange() const {
+	if (SideFunctions::isCharInstructionValid(instruction[FIRST]) && SideFunctions::isNumInstructionValid(instruction[SECOND]) && SideFunctions::isCharInstructionValid(instruction[THIRD]) && SideFunctions::isNumInstructionValid(instruction[FORTH])) { // checks if instuction is in a valid format
 		return true;
 	}
 	return false;

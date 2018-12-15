@@ -11,10 +11,11 @@ enum INSTRUCTION {FIRST, SECOND, THIRD, FORTH};
 class Board
 {
 private:
-	Piece* Pieces[ENDOF_LENGTH][ENDOF_LENGTH];
+	Piece* pieces[ENDOF_LENGTH][ENDOF_LENGTH];
+	std::string instruction;
 public:
 	Board();
-	bool isValidRange(std::string str) const;
+	bool isValidRange() const;
 	void pieceExists();
 	void noPiece();
 	void isReachable();

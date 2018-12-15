@@ -4,7 +4,7 @@ class Pawn :
 	public Piece
 {
 public:
-	Pawn();
+	Pawn(bool color);
 	~Pawn();
 };
 

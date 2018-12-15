@@ -19,7 +19,6 @@ public:
 	void eat();
 	void isSame();
 	void makeMove();
-	void funcB();
 	~Board();
 };
 

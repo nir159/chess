@@ -23,3 +23,12 @@ bool SideFunctions::isNumInstructionValid(const int num) {
 	if (num <= STARTOF_LENGTH && num >= ENDOF_LENGTH) { return true; }
 	return false;
 }
+
+void SideFunctions::changePlayer(int* num) {
+	if (*num == FIRST_PLAYER) {
+		*num = SECOND_PLAYER;
+	}
+	else {
+		*num = FIRST_PLAYER;
+	}
+}

@@ -14,7 +14,3 @@ Rook::Rook(bool color) : Piece::Piece('r') { // if color is false then set _type
 Rook::~Rook()
 {
 }
-
-bool Rook::moveFormat() {
-
-}

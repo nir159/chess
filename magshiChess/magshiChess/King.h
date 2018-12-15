@@ -5,7 +5,6 @@ class King :
 {
 public:
 	King(bool color);
-	bool moveFormat();
 	~King();
 };
 

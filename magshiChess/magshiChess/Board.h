@@ -11,9 +11,9 @@ enum INSTRUCTION {FIRST, SECOND, THIRD, FORTH};
 class Board
 {
 private:
-	Piece* pieces[ENDOF_LENGTH][ENDOF_LENGTH];
-	std::string instruction;
-	int currPlayer;
+	Piece* _pieces[ENDOF_LENGTH][ENDOF_LENGTH];
+	std::string _instruction;
+	int _currPlayer;
 public:
 	Board();
 	bool isValidRange() const;

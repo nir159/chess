@@ -13,3 +13,10 @@ King::King(bool color) : Piece::Piece('r') { // if color is false then set _type
 King::~King()
 {
 }
+
+bool King::moveFormat(std::string str) {
+	if (abs(str[FIRST] - str[THIRD]) > 1 && abs(str[SECOND] - str[FORTH]) > 1) {
+		return true;
+	}
+	return false;
+}

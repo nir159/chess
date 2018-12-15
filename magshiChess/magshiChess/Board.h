@@ -2,13 +2,7 @@
 #include "Piece.h"
 #include "SideFunctions.h"
 #include <string>
-
-#define WHITE_PLAYER 1
-#define BLACK_PLAYER 2
-#define INSTRUCTION_LEN 4
-#define ENDOF_LENGTH 8
-#define PIECES_PER_PLAYER 16
-enum INSTRUCTION {FIRST, SECOND, THIRD, FORTH};
+#include "SideFunctions.h"
 
 class Board
 {
@@ -23,7 +17,7 @@ public:
 	bool noPiece() const;
 	void isReachable();
 	void isSelfChess();
-	void isChess();
+	bool isChess();
 	void eat();
 	bool isSame() const;
 	void makeMove();

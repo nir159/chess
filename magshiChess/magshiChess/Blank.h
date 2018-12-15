@@ -5,6 +5,7 @@ class Blank :
 {
 public:
 	Blank();
+	bool moveFormat(std::string str);
 	~Blank();
 };
 

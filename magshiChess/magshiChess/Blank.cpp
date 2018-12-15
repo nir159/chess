@@ -12,3 +12,8 @@ Blank::Blank() : Piece::Piece('#') {
 Blank::~Blank()
 {
 }
+
+bool Blank::moveFormat(std::string str) {
+	// can't move
+	return false;
+}

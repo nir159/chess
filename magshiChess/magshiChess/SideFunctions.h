@@ -15,6 +15,13 @@
 #define STARTOF_TYPE_P2 'A'
 #define ENDOF_TYPE_P2 'Z'
 
+#define WHITE_PLAYER 1
+#define BLACK_PLAYER 2
+#define INSTRUCTION_LEN 4
+#define ENDOF_LENGTH 8
+#define PIECES_PER_PLAYER 16
+enum INSTRUCTION { FIRST, SECOND, THIRD, FORTH };
+
 class SideFunctions
 {
 public:

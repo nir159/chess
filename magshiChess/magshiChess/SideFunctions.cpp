@@ -36,3 +36,19 @@ void SideFunctions::changePlayer(int* num) {
 	if (*num == FIRST_PLAYER) { *num = SECOND_PLAYER; }
 	else { *num = FIRST_PLAYER; }
 }
+
+/*
+function will check which player is controling the recieved piece
+Input:
+	ch - piece type to check
+Output:
+	if player 1 is controling the recieved piece, return 1,
+	if player 2 is controling the recieved piece, return 2
+	if none of the players are controling the recieved piece, return 0
+*/
+int SideFunctions::whichPlayer(const char ch)
+{
+	if (STARTOF_TYPE_P1 < ch && ch < ENDOF_TYPE_P1) { return FIRST_PLAYER; }
+	else if (STARTOF_TYPE_P2 < ch && ch < ENDOF_TYPE_P2) { return SECOND_PLAYER; }
+	else { return BLANK_PLAYER; }
+}

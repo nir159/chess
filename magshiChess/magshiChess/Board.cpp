@@ -19,7 +19,7 @@ Output:
 	if Instuction is in the correct format and the parameters in it are in the valid range then return true, else return false
 */
 bool Board::isValidRange() const {
-	if (SideFunctions::isCharInstructionValid(instruction[FIRST]) && SideFunctions::isNumInstructionValid(instruction[SECOND]) && SideFunctions::isCharInstructionValid(instruction[THIRD]) && SideFunctions::isNumInstructionValid(instruction[FORTH])) { // checks if instuction is in a valid format
+	if (SideFunctions::isCharInstructionValid(_instruction[FIRST]) && SideFunctions::isNumInstructionValid(_instruction[SECOND]) && SideFunctions::isCharInstructionValid(_instruction[THIRD]) && SideFunctions::isNumInstructionValid(_instruction[FORTH])) { // checks if instuction is in a valid format
 		return true;
 	}
 	return false;

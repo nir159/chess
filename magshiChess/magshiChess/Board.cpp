@@ -36,3 +36,17 @@ bool Board::isSame() const {
 	if (_instruction[FIRST] == _instruction[THIRD] && _instruction[SECOND] == _instruction[FORTH]) { return true; }
 	return false;
 }
+
+bool Board::pieceExists() const {
+	if (_currPlayer == WHITE_PLAYER) {
+		if (SideFunctions::whichPlayer((*_pieces[_instruction[FIRST] - 'a'][_instruction[SECOND]]).getType()) == WHITE_PLAYER) {
+			return true;
+		}
+	}
+	else {
+		if (SideFunctions::whichPlayer((*_pieces[_instruction[FIRST] - 'a'][_instruction[SECOND]]).getType()) == BLACK_PLAYER) {
+			return true;
+		}
+	}
+	return false;
+}

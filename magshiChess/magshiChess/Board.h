@@ -3,6 +3,8 @@
 #include "SideFunctions.h"
 #include <string>
 
+#define WHITE_PLAYER 1
+#define BLACK_PLAYER 2
 #define INSTRUCTION_LEN 4
 #define ENDOF_LENGTH 8
 #define PIECES_PER_PLAYER 16
@@ -17,7 +19,7 @@ private:
 public:
 	Board();
 	bool isValidRange() const;
-	void pieceExists();
+	bool pieceExists() const;
 	void noPiece();
 	void isReachable();
 	void isSelfChess();

@@ -13,3 +13,7 @@ King::King(bool color) : Piece::Piece('r') { // if color is false then set _type
 King::~King()
 {
 }
+
+bool King::moveFormat() {
+
+}

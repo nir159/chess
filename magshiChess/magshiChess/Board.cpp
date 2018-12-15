@@ -25,9 +25,14 @@ bool Board::isValidRange() const {
 	return false;
 }
 
+/*
+function will check if the Instuction's parameters are not the same in each of it's parts
+Input:
+	[Void]
+Output:
+	if the Instuction's parameters are not the same in each of it's parts then return true, else false
+*/
 bool Board::isSame() const {
-	if (_instruction[FIRST] == _instruction[THIRD] && _instruction[SECOND] == _instruction[FORTH]) {
-		return true;
-	}
+	if (_instruction[FIRST] == _instruction[THIRD] && _instruction[SECOND] == _instruction[FORTH]) { return true; }
 	return false;
 }

@@ -13,6 +13,7 @@ class Board
 private:
 	Piece* pieces[ENDOF_LENGTH][ENDOF_LENGTH];
 	std::string instruction;
+	int currPlayer;
 public:
 	Board();
 	bool isValidRange() const;

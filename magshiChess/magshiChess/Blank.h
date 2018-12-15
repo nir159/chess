@@ -5,6 +5,15 @@ class Blank :
 {
 public:
 	Blank();
+	void isValidRange();
+	void pieceExists();
+	void noPiece();
+	void isReachable();
+	void isSelfChess();
+	void isChess();
+	void eat();
+	void isSame();
+	void makeMove();
 	~Blank();
 };
 

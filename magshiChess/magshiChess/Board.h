@@ -20,7 +20,7 @@ public:
 	Board();
 	bool isValidRange() const;
 	bool pieceExists() const;
-	void noPiece();
+	bool noPiece() const;
 	void isReachable();
 	void isSelfChess();
 	void isChess();

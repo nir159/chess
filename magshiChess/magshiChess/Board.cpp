@@ -37,30 +37,28 @@ bool Board::isSame() const {
 	return false;
 }
 
+/*
+function will check if the current player have a piece in the source tile
+Input:
+	[Void]
+Output:
+	if the current player have a piece in the source tile then return true, else false
+*/
 bool Board::pieceExists() const {
-	if (_currPlayer == WHITE_PLAYER) {
-		if (SideFunctions::whichPlayer((*_pieces[_instruction[FIRST] - 'a'][_instruction[SECOND]]).getType()) == WHITE_PLAYER) {
-			return true;
-		}
-	}
-	else {
-		if (SideFunctions::whichPlayer((*_pieces[_instruction[FIRST] - 'a'][_instruction[SECOND]]).getType()) == BLACK_PLAYER) {
-			return true;
-		}
-	}
+	if (_currPlayer == WHITE_PLAYER && SideFunctions::whichPlayer((*_pieces[_instruction[FIRST] - 'a'][_instruction[SECOND]]).getType()) == WHITE_PLAYER) { return true; }
+	else if (SideFunctions::whichPlayer((*_pieces[_instruction[FIRST] - 'a'][_instruction[SECOND]]).getType()) == BLACK_PLAYER) { return true; }
 	return false;
 }
 
+/*
+function will check if the current player have a piece in the destination tile
+Input:
+	[Void]
+Output:
+	if the current player have a piece in the destination tile then return true, else false
+*/
 bool Board::noPiece() const {
-	if (_currPlayer == WHITE_PLAYER) {
-		if (SideFunctions::whichPlayer((*_pieces[_instruction[THIRD] - 'a'][_instruction[FORTH]]).getType()) == WHITE_PLAYER) {
-			return false;
-		}
-	}
-	else {
-		if (SideFunctions::whichPlayer((*_pieces[_instruction[THIRD] - 'a'][_instruction[FORTH]]).getType()) == BLACK_PLAYER) {
-			return false;
-		}
-	}
+	if (_currPlayer == WHITE_PLAYER && (SideFunctions::whichPlayer((*_pieces[_instruction[THIRD] - 'a'][_instruction[FORTH]]).getType()) == WHITE_PLAYER)) { return false; }
+	else if (SideFunctions::whichPlayer((*_pieces[_instruction[THIRD] - 'a'][_instruction[FORTH]]).getType()) == BLACK_PLAYER) { return false; }
 	return true;
 }

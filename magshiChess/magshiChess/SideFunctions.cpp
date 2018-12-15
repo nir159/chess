@@ -33,8 +33,8 @@ Output:
 	if number in Instuction is valid return true, else return false
 */
 void SideFunctions::changePlayer(int* num) {
-	if (*num == FIRST_PLAYER) { *num = SECOND_PLAYER; }
-	else { *num = FIRST_PLAYER; }
+	if (*num == WHITE_PLAYER) { *num = BLACK_PLAYER; }
+	else { *num = WHITE_PLAYER; }
 }
 
 /*
@@ -48,7 +48,7 @@ Output:
 */
 int SideFunctions::whichPlayer(const char ch)
 {
-	if (STARTOF_TYPE_P1 < ch && ch < ENDOF_TYPE_P1) { return FIRST_PLAYER; }
-	else if (STARTOF_TYPE_P2 < ch && ch < ENDOF_TYPE_P2) { return SECOND_PLAYER; }
+	if (STARTOF_TYPE_P1 < ch && ch < ENDOF_TYPE_P1) { return WHITE_PLAYER; }
+	else if (STARTOF_TYPE_P2 < ch && ch < ENDOF_TYPE_P2) { return BLACK_PLAYER; }
 	else { return BLANK_PLAYER; }
 }

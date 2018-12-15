@@ -50,3 +50,17 @@ bool Board::pieceExists() const {
 	}
 	return false;
 }
+
+bool Board::noPiece() const {
+	if (_currPlayer == WHITE_PLAYER) {
+		if (SideFunctions::whichPlayer((*_pieces[_instruction[THIRD] - 'a'][_instruction[FORTH]]).getType()) == WHITE_PLAYER) {
+			return false;
+		}
+	}
+	else {
+		if (SideFunctions::whichPlayer((*_pieces[_instruction[THIRD] - 'a'][_instruction[FORTH]]).getType()) == BLACK_PLAYER) {
+			return false;
+		}
+	}
+	return true;
+}

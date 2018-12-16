@@ -62,3 +62,30 @@ bool Board::noPiece() const {
 	else if (SideFunctions::whichPlayer((*_pieces[_instruction[THIRD] - 'a'][_instruction[FORTH]]).getType()) == BLACK_PLAYER) { return false; }
 	return true;
 }
+
+bool Board::isChess() const {
+	int i = 0, j = 0;
+	std::string distance = ""; // distance from new position to king
+	if (_currPlayer == WHITE_PLAYER) {
+		for (i = 0; i < ENDOF_LENGTH; i++) {
+			for (j = 0; j < ENDOF_LENGTH; j++) {
+				if (_pieces[i][j]->getType() == BLACK_KING) {
+					distance += _instruction[THIRD] + _instruction[FORTH] + (char)i + STARTOF_TYPE_P1 + j;
+				}
+			}
+		}
+	}
+	else {
+		for (i = 0; i < ENDOF_LENGTH; i++) {
+			for (j = 0; j < ENDOF_LENGTH; j++) {
+				if (_pieces[i][j]->getType() == WHITE_KING) {
+					distance += _instruction[THIRD] + _instruction[FORTH] + (char)i + STARTOF_TYPE_P1 + j;
+				}
+			}
+		}
+	}
+	if (_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND]]->moveFormat(distance) && !(_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND]]->skippedPlayers(distance, _pieces))) {
+		return true;
+	}
+	return false;
+}

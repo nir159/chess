@@ -26,6 +26,14 @@ bool King::moveFormat(std::string str) {
 	return false;
 }
 
+/*
+function will check if the piece will skip any players by making the move
+Input:
+	str - Instruction to check
+	board - game board
+Output:
+	if the piece will skip any players by making the move then return true, else return false
+*/
 bool King::skippedPlayers(std::string str, Piece* const board[ENDOF_LENGTH][ENDOF_LENGTH]) {
 	return false; // king can't skip players moves only one tile
 }

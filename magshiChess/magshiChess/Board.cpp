@@ -94,7 +94,14 @@ bool Board::isChess() const {
 	return false;
 }
 
+/*
+function will check if the Instruction can be committed
+Input:
+	[Void]
+Output:
+	if the Instruction can be committed then return true, else false
+*/
 bool Board::isReachable() const {
-	if (_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND]]->moveFormat(_instruction) && !(_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND]]->skippedPlayers(_instruction, _pieces))){ return true }
+	if (_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND]]->moveFormat(_instruction) && !(_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND]]->skippedPlayers(_instruction, _pieces))) { return true; }
 	return false;
 }

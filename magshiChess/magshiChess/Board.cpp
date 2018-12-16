@@ -63,29 +63,33 @@ bool Board::noPiece() const {
 	return true;
 }
 
+/*
+function will check if the current player have a done a move that will create a chess situation for opponent
+Input:
+	[Void]
+Output:
+	if the current player have a done a move that will create a chess situation for opponent then return true, else false
+*/
 bool Board::isChess() const {
 	int i = 0, j = 0;
 	std::string distance = ""; // distance from new position to king
-	if (_currPlayer == WHITE_PLAYER) {
+
+	if (_currPlayer == WHITE_PLAYER) { // checks if current player is White
+		/* runs on game board */
 		for (i = 0; i < ENDOF_LENGTH; i++) {
 			for (j = 0; j < ENDOF_LENGTH; j++) {
-				if (_pieces[i][j]->getType() == BLACK_KING) {
-					distance += _instruction[THIRD] + _instruction[FORTH] + (char)i + STARTOF_TYPE_P1 + j;
-				}
+				if (_pieces[i][j]->getType() == BLACK_KING) { /* checks if current piece on board is opponent King piece */ distance += _instruction[THIRD] + _instruction[FORTH] + (char)i + STARTOF_TYPE_P1 + j; /* if it is save last dest + King loc in a new instruction */ }
 			}
 		}
 	}
 	else {
+		/* runs on game board */
 		for (i = 0; i < ENDOF_LENGTH; i++) {
 			for (j = 0; j < ENDOF_LENGTH; j++) {
-				if (_pieces[i][j]->getType() == WHITE_KING) {
-					distance += _instruction[THIRD] + _instruction[FORTH] + (char)i + STARTOF_TYPE_P1 + j;
-				}
+				if (_pieces[i][j]->getType() == WHITE_KING) { /* checks if current piece on board is opponent King piece */ distance += _instruction[THIRD] + _instruction[FORTH] + (char)i + STARTOF_TYPE_P1 + j; /* if it is save last dest + King loc in a new instruction */ }
 			}
 		}
 	}
-	if (_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND]]->moveFormat(distance) && !(_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND]]->skippedPlayers(distance, _pieces))) {
-		return true;
-	}
+	if (_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND]]->moveFormat(distance) && !(_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND]]->skippedPlayers(distance, _pieces))) { /* checks if the piece threatens the king */ return true; }
 	return false;
 }

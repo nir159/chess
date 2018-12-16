@@ -14,3 +14,10 @@ Rook::Rook(bool color) : Piece::Piece('r') { // if color is false then set _type
 Rook::~Rook()
 {
 }
+
+bool Rook::moveFormat(std::string str) {
+	if (str[FIRST] != str[THIRD] && str[SECOND] != str[FORTH]) {
+		return false;
+	}
+	return true;
+}

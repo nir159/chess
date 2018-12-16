@@ -15,9 +15,9 @@ public:
 	bool isValidRange() const;
 	bool pieceExists() const;
 	bool noPiece() const;
+	bool isChess();
 	void isReachable();
 	void isSelfChess();
-	bool isChess();
 	void eat();
 	bool isSame() const;
 	void makeMove();

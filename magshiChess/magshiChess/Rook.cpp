@@ -35,7 +35,7 @@ Input:
 Output:
 	if the piece will skip any players by making the move then return true, else return false
 */
-bool Rook::skippedPlayers(std::string str, Piece* board[][ENDOF_LENGTH]) {
+bool Rook::skippedPlayers(std::string str, Piece* const board[ENDOF_LENGTH][ENDOF_LENGTH]) {
 	bool rightSide = false;
 	int minRange, MaxRange, i = 0;
 

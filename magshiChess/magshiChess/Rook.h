@@ -8,7 +8,7 @@ class Rook :
 public:
 	Rook(bool color);
 	bool moveFormat(std::string str);
-	bool skippedPlayers(std::string str, Piece* board[][ENDOF_LENGTH]);
+	bool skippedPlayers(std::string str, Piece* const board[ENDOF_LENGTH][ENDOF_LENGTH]);
 	~Rook();
 };
 

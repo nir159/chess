@@ -22,8 +22,6 @@ Output:
 	if Instruction is valid for current type of piece then return true, else return false
 */
 bool King::moveFormat(std::string str) {
-	if (abs(str[FIRST] - str[THIRD]) > 1 && abs(str[SECOND] - str[FORTH]) > 1) {
-		return true;
-	}
+	if (abs(str[FIRST] - str[THIRD]) > 1 && abs(str[SECOND] - str[FORTH]) > 1) { return true; }
 	return false;
 }

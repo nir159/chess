@@ -15,9 +15,14 @@ Rook::~Rook()
 {
 }
 
+/*
+function will check if Instruction is valid for current type of piece
+Input:
+	str - Instruction to check
+Output:
+	if Instruction is valid for current type of piece then return true, else return false
+*/
 bool Rook::moveFormat(std::string str) {
-	if (str[FIRST] != str[THIRD] && str[SECOND] != str[FORTH]) {
-		return false;
-	}
+	if (str[FIRST] != str[THIRD] && str[SECOND] != str[FORTH]) { return false; }
 	return true;
 }

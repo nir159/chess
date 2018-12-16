@@ -25,3 +25,7 @@ bool King::moveFormat(std::string str) {
 	if (abs(str[FIRST] - str[THIRD]) > 1 && abs(str[SECOND] - str[FORTH]) > 1) { return true; }
 	return false;
 }
+
+bool King::skippedPlayers(std::string str, Piece* const board[ENDOF_LENGTH][ENDOF_LENGTH]) {
+	return false; // king can't skip players moves only one tile
+}

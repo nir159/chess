@@ -93,3 +93,8 @@ bool Board::isChess() const {
 	if (_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND]]->moveFormat(distance) && !(_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND]]->skippedPlayers(distance, _pieces))) { /* checks if the piece threatens the king */ return true; }
 	return false;
 }
+
+bool Board::isReachable() const {
+	if (_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND]]->moveFormat(_instruction) && !(_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND]]->skippedPlayers(_instruction, _pieces))){ return true }
+	return false;
+}

@@ -16,7 +16,7 @@ public:
 	bool pieceExists() const;
 	bool noPiece() const;
 	bool isChess() const;
-	void isReachable();
+	bool isReachable() const;
 	void isSelfChess();
 	void eat();
 	bool isSame() const;

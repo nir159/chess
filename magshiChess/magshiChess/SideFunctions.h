@@ -15,6 +15,8 @@
 #define STARTOF_TYPE_P2 'A'
 #define ENDOF_TYPE_P2 'Z'
 #define BLANK '#'
+#define BLACK_KING 'K'
+#define WHITE_KING 'k'
 
 #define INSTRUCTION_LEN 4
 #define PIECES_PER_PLAYER 16

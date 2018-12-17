@@ -1,4 +1,4 @@
 # TODO
 
-    * Exceptions
-    * Input Checks
+* Exceptions
+* Input Checks

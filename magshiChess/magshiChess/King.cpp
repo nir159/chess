@@ -33,6 +33,6 @@ Input:
 Output:
 	if the piece will skip any players by making the move then return true, else return false
 */
-bool King::skippedPlayers(std::string instruction, Piece* const gameBoard[ENDOF_LENGTH][ENDOF_LENGTH]) {
+bool King::hasSkippedPlayers(std::string instruction, Piece* const gameBoard[ENDOF_LENGTH][ENDOF_LENGTH]) {
 	return false; // king can't skip players moves only one tile
 }

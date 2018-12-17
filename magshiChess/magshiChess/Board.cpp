@@ -1,11 +1,16 @@
 #include "Board.h"
 
-
+/*
+function will construct an Board object
+input:
+	gameBoard - field value to set
+*/
 Board::Board(std::string gameBoard) : _currPlayer(WHITE_PLAYER), _instruction("")
 {
 	int i = 0, j = 0;
 	for (i = ENDOF_LENGTH - ONE; i >= 0; i--) {
 		for (j = 0; j < ENDOF_LENGTH; j++) {
+			/* creates Pieces on Object's _pieces array field based on gameBoard parameter */
 			switch (gameBoard[i*j]) {
 				case 'R':
 				case 'r':
@@ -15,8 +20,7 @@ Board::Board(std::string gameBoard) : _currPlayer(WHITE_PLAYER), _instruction(""
 				case 'k':
 					_pieces[i][j] = new King(gameBoard[i*j]);
 					break;
-				}
-			//_pieces[i][j] = new ;
+			} //_pieces[i][j] = new ;
 		}
 	}
 }

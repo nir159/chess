@@ -4,7 +4,7 @@
 Board::Board(std::string gameBoard) : _currPlayer(WHITE_PLAYER), _instruction("")
 {
 	int i = 0, j = 0;
-	for (i = 0; i < ENDOF_LENGTH; i++) {
+	for (i = ENDOF_LENGTH; i > 0; i--) {
 		for (j = 0; j < ENDOF_LENGTH; j++) {
 			switch (gameBoard[i*j]) {
 				case 'R':
@@ -34,7 +34,7 @@ Output:
 	if Instuction is in the correct format and the parameters in it are in the valid range then return true, else return false
 */
 bool Board::isValidRange() const {
-	if (SideFunctions::isInstructionValid(_instruction[FIRST] - STARTOF_WIDTH) && SideFunctions::isInstructionValid(_instruction[SECOND] - STARTOF_LENGTH_CHAR) && SideFunctions::isInstructionValid(_instruction[THIRD] - STARTOF_WIDTH) && SideFunctions::isInstructionValid(_instruction[FORTH] - STARTOF_LENGTH_CHAR)) { // checks if instuction is in a valid format
+	if (SideFunctions::isInstructionValid(_instruction[FIRST] - STARTOF_WIDTH) && SideFunctions::isInstructionValid(_instruction[SECOND] - STARTOF_LENGTH) && SideFunctions::isInstructionValid(_instruction[THIRD] - STARTOF_WIDTH) && SideFunctions::isInstructionValid(_instruction[FORTH] - STARTOF_LENGTH)) { // checks if instuction is in a valid format
 		return true;
 	}
 	return false;
@@ -117,7 +117,7 @@ Output:
 	if the Instruction can be committed then return true, else false
 */
 bool Board::isReachable() const {
-	if (_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND] - STARTOF_LENGTH_CHAR]->moveFormat(_instruction) && !(_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND] - STARTOF_LENGTH_CHAR]->hasSkippedPlayers(_instruction, _pieces))) { return true; }
+	if (_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND]]->moveFormat(_instruction) && !(_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND]]->hasSkippedPlayers(_instruction, _pieces))) { return true; }
 	return false;
 }
 

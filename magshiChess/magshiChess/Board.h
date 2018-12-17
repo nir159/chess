@@ -11,7 +11,7 @@ private:
 	std::string _instruction;
 	int _currPlayer;
 public:
-	Board();
+	Board(std::string board);
 	bool isValidRange() const;
 	bool pieceExists() const;
 	bool noPiece() const;

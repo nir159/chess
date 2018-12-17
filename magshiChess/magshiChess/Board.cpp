@@ -113,3 +113,15 @@ bool Board::isReachable() const {
 	if (_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND]]->moveFormat(_instruction) && !(_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND]]->skippedPlayers(_instruction, _pieces))) { return true; }
 	return false;
 }
+
+/*
+Function will set an Shape class' _instruction field
+Input:
+	instruction - field value to set
+Output:
+	[Void]
+*/
+void Board::setInstruction(std::string instruction)
+{
+	this->_instruction = instruction;
+}

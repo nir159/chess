@@ -21,6 +21,7 @@ public:
 	void eat();
 	bool isSame() const;
 	void makeMove();
+	void setInstruction(std::string instruction);
 	~Board();
 };
 

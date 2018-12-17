@@ -17,23 +17,23 @@ King::~King()
 /*
 function will check if Instruction is valid for current type of piece
 Input:
-	str - Instruction to check
+	instruction - Instruction to check
 Output:
 	if Instruction is valid for current type of piece then return true, else return false
 */
-bool King::moveFormat(std::string str) {
-	if (abs(str[FIRST] - str[THIRD]) > 1 && abs(str[SECOND] - str[FORTH]) > 1) { return false; }
+bool King::moveFormat(std::string instruction) {
+	if (abs(instruction[FIRST] - instruction[THIRD]) > 1 && abs(instruction[SECOND] - instruction[FORTH]) > 1) { return false; }
 	return true;
 }
 
 /*
 function will check if the piece will skip any players by making the move
 Input:
-	str - Instruction to check
-	board - game board
+	instruction - Instruction to check
+	gameBoard - game board
 Output:
 	if the piece will skip any players by making the move then return true, else return false
 */
-bool King::skippedPlayers(std::string str, Piece* const board[ENDOF_LENGTH][ENDOF_LENGTH]) {
+bool King::skippedPlayers(std::string instruction, Piece* const gameBoard[ENDOF_LENGTH][ENDOF_LENGTH]) {
 	return false; // king can't skip players moves only one tile
 }

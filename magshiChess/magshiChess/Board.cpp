@@ -1,12 +1,12 @@
 #include "Board.h"
 
 
-Board::Board(std::string board) : _currPlayer(WHITE_PLAYER), _instruction("")
+Board::Board(std::string gameBoard) : _currPlayer(WHITE_PLAYER), _instruction("")
 {
 	int i = 0, j = 0;
 	for (i = 0; i < ENDOF_LENGTH; i++) {
 		for (j = 0; j < ENDOF_LENGTH; j++) {
-			switch (board[i*j]) {
+			switch (gameBoard[i*j]) {
 
 			}
 			//_pieces[i][j] = new ;

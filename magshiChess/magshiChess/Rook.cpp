@@ -18,24 +18,24 @@ Rook::~Rook()
 /*
 function will check if Instruction is valid for current type of piece
 Input:
-	str - Instruction to check
+	instruction - Instruction to check
 Output:
 	if Instruction is valid for current type of piece then return true, else return false
 */
-bool Rook::moveFormat(std::string str) {
-	if (str[FIRST] != str[THIRD] && str[SECOND] != str[FORTH]) { return false; }
+bool Rook::moveFormat(std::string instruction) {
+	if (instruction[FIRST] != instruction[THIRD] && instruction[SECOND] != instruction[FORTH]) { return false; }
 	return true;
 }
 
 /*
 function will check if the piece will skip any players by making the move
 Input:
-	str - Instruction to check
-	board - game board
+	instruction - Instruction to check
+	gameBoard - game board
 Output:
 	if the piece will skip any players by making the move then return true, else return false
 */
-bool Rook::skippedPlayers(std::string str, Piece* const board[ENDOF_LENGTH][ENDOF_LENGTH]) {
+bool Rook::hasSkippedPlayers(std::string str, Piece* const gameBoard[ENDOF_LENGTH][ENDOF_LENGTH]) {
 	bool rightSide = false;
 	int minRange, MaxRange, i = 0;
 
@@ -61,9 +61,9 @@ bool Rook::skippedPlayers(std::string str, Piece* const board[ENDOF_LENGTH][ENDO
 		minRange = str[SECOND] - STARTOF_TYPE_P1;
 		MaxRange = str[FORTH] - STARTOF_TYPE_P1;
 	}
-	for (i = minRange + 1; i < MaxRange; i++) { // runs on requested Range & Side in game board
-		if (rightSide && board[(str[FIRST] - STARTOF_TYPE_P1)][i]->getType() != BLANK) { /* checks if Side is Length (Right Side) && if it is check if at Length Piece skips any Other Pieces */ return true; }		
-		else if (board[(char)(i + STARTOF_TYPE_P1)][str[SECOND]]->getType() != BLANK) { /* else if it is check if at Width Piece skips any Other Pieces */ return true; }	
+	for (i = minRange + 1; i < MaxRange; i++) { // runs on requested Range & Side in game gameBoard
+		if (rightSide && gameBoard[(str[FIRST] - STARTOF_TYPE_P1)][i]->getType() != BLANK) { /* checks if Side is Length (Right Side) && if it is check if at Length Piece skips any Other Pieces */ return true; }		
+		else if (gameBoard[(char)(i + STARTOF_TYPE_P1)][str[SECOND]]->getType() != BLANK) { /* else if it is check if at Width Piece skips any Other Pieces */ return true; }	
 	}
 	return false;
 }

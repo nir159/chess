@@ -25,9 +25,9 @@ enum INSTRUCTION { FIRST, SECOND, THIRD, FORTH };
 class SideFunctions
 {
 public:
-	static bool isCharInstructionValid(const char ch);
-	static bool isNumInstructionValid(const int num);
-	static void changePlayer(int* num);
-	static int whichPlayer(const char ch);
+	static bool isCharInstructionValid(const char width);
+	static bool isNumInstructionValid(const int length);
+	static void changePlayer(int* length);
+	static int whichPlayer(const char width);
 };
 

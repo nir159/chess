@@ -6,7 +6,7 @@ class Rook :
 	public Piece
 {
 public:
-	Rook(bool color);
+	Rook(char type);
 	bool moveFormat(std::string str);
 	bool hasSkippedPlayers(std::string instruction, Piece* const gameBoard[ENDOF_LENGTH][ENDOF_LENGTH]);
 	~Rook();

@@ -5,7 +5,7 @@ class King :
 	public Piece
 {
 public:
-	King(bool color);
+	King(char type);
 	bool moveFormat(std::string instruction);
 	bool skippedPlayers(std::string instruction, Piece* const gameBoard[ENDOF_LENGTH][ENDOF_LENGTH]);
 	~King();

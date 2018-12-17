@@ -42,12 +42,12 @@ void main()
 	Board game(msgToGraphics);
 	// get message from graphics
 	string msgFromGraphics = p.getMessageFromGraphics();
-	game.setInstruction(msgFromGraphics);
+	
 	while (msgFromGraphics != "quit")
 	{
 		// should handle the string the sent from graphics
 		// according the protocol. Ex: e2e4           (move e2 to e4)
-		
+		game.setInstruction(msgFromGraphics);
 		if (game.isValidRange() && game.isReachable()) {
 			strcpy_s(msgToGraphics, "0"); // msgToGraphics should contain the result of the operation
 		}

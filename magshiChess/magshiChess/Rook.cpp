@@ -51,14 +51,14 @@ bool Rook::hasSkippedPlayers(std::string str, Piece* const gameBoard[ENDOF_LENGT
 	else if (str[SECOND] > str[FORTH]) { // checks if 1st Part's Num is Bigger then 2nd Part's Num
 		/* Sets Fitting Values for Range & Side in for loop */
 		rightSide = true;
-		MaxRange = str[SECOND] - STARTOF_TYPE_P1;
-		minRange = str[FORTH] - STARTOF_TYPE_P1;
+		MaxRange = str[SECOND] - STARTOF_LENGTH_CHAR;
+		minRange = str[FORTH] - STARTOF_LENGTH_CHAR;
 	}
 	else if (str[SECOND] < str[FORTH]) { // checks if 2nd Part's Num is Bigger then 1st Part's Num
 		/* Sets Fitting Values for Range & Side in for loop */
 		rightSide = true;
-		minRange = str[SECOND] - STARTOF_TYPE_P1;
-		MaxRange = str[FORTH] - STARTOF_TYPE_P1;
+		minRange = str[SECOND] - STARTOF_LENGTH_CHAR;
+		MaxRange = str[FORTH] - STARTOF_LENGTH_CHAR;
 	}
 	for (i = minRange + 1; i < MaxRange; i++) { // runs on requested Range & Side in game gameBoard
 		if (rightSide && gameBoard[(str[FIRST] - STARTOF_TYPE_P1)][i]->getType() != BLANK) { /* checks if Side is Length (Right Side) && if it is check if at Length Piece skips any Other Pieces */ return true; }		

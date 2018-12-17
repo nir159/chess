@@ -8,6 +8,7 @@
 #define BLACK_PLAYER 2
 
 #define STARTOF_LENGTH 1
+#define STARTOF_LENGTH_CHAR '1'
 #define ENDOF_LENGTH 8
 
 #define STARTOF_TYPE_P1 'a'

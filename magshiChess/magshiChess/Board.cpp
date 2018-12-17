@@ -6,8 +6,10 @@ Board::Board(std::string board) : _currPlayer(WHITE_PLAYER), _instruction("")
 	int i = 0, j = 0;
 	for (i = 0; i < ENDOF_LENGTH; i++) {
 		for (j = 0; j < ENDOF_LENGTH; j++) {
-			//switch ()
-			//_pieces[i][j] = ;
+			switch (board[i*j]) {
+
+			}
+			//_pieces[i][j] = new ;
 		}
 	}
 }

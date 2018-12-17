@@ -34,7 +34,7 @@ Output:
 	if Instuction is in the correct format and the parameters in it are in the valid range then return true, else return false
 */
 bool Board::isValidRange() const {
-	if (SideFunctions::isInstructionValid(_instruction[FIRST] - STARTOF_WIDTH) && SideFunctions::isInstructionValid(_instruction[SECOND] - STARTOF_LENGTH) && SideFunctions::isInstructionValid(_instruction[THIRD] - STARTOF_WIDTH) && SideFunctions::isInstructionValid(_instruction[FORTH] - STARTOF_LENGTH)) { // checks if instuction is in a valid format
+	if (SideFunctions::isInstructionValid(_instruction[FIRST] - STARTOF_WIDTH + ONE) && SideFunctions::isInstructionValid(_instruction[SECOND] - STARTOF_LENGTH_CHAR + ONE) && SideFunctions::isInstructionValid(_instruction[THIRD] - STARTOF_WIDTH + ONE) && SideFunctions::isInstructionValid(_instruction[FORTH] - STARTOF_LENGTH_CHAR + ONE)) { // checks if instuction is in a valid format
 		return true;
 	}
 	return false;

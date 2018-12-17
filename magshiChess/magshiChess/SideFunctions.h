@@ -1,7 +1,9 @@
 #pragma once
 #include <string>
+#include <iostream>
 #define STARTOF_WIDTH 'a'
 #define ENDOF_WIDTH 'h'
+#define ONE 1
 
 #define BLANK_PLAYER 0
 #define WHITE_PLAYER 1

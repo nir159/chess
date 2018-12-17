@@ -51,7 +51,10 @@ void main()
 		if (game.isValidRange() && game.isReachable()) {
 			strcpy_s(msgToGraphics, "0"); // msgToGraphics should contain the result of the operation
 		}
-		strcpy_s(msgToGraphics, "1"); // msgToGraphics should contain the result of the operation
+		else {
+			strcpy_s(msgToGraphics, "YOUR CODE"); // msgToGraphics should contain the result of the operation
+		}
+		
 
 
 

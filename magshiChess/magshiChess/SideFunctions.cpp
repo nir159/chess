@@ -1,26 +1,14 @@
 #include "SideFunctions.h"
 
 /*
-function will check if character in Instuction is valid if it is return true, else return false
+function will check if the number in Instuction is valid if it is return true, else return false
 Input:
-	width - character to check
+	size - the size of the char
 Output:
-	if character in Instuction is valid return true, else return false
+	if Instuction is valid return true, else return false
 */
-bool SideFunctions::isCharInstructionValid(const char width) {
-	if (width <= STARTOF_WIDTH && width >= ENDOF_WIDTH) { return true; }
-	return false;
-}
-
-/*
-function will check if number in Instuction is valid if it is return true, else return false
-Input:
-	length - number to check
-Output:
-	if number in Instuction is valid return true, else return false
-*/
-bool SideFunctions::isNumInstructionValid(const int length) {
-	if (length <= STARTOF_LENGTH && length >= ENDOF_LENGTH) { return true; }
+bool SideFunctions::isInstructionValid(const char size) {
+	if (size >= STARTOF_LENGTH && size <= ENDOF_LENGTH) { return true; }
 	return false;
 }
 

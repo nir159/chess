@@ -36,3 +36,14 @@ Output:
 bool King::hasSkippedPlayers(std::string instruction, Piece* const gameBoard[ENDOF_LENGTH][ENDOF_LENGTH]) {
 	return false; // king can't skip players moves only one tile
 }
+
+/*
+Function will return an King class' type field
+Input:
+	[Void]
+Output:
+	King class' type field
+*/
+char King::getType() {
+	return this->_type;
+}

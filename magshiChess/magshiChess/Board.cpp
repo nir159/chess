@@ -7,8 +7,11 @@ Board::Board(std::string gameBoard) : _currPlayer(WHITE_PLAYER), _instruction(""
 	for (i = 0; i < ENDOF_LENGTH; i++) {
 		for (j = 0; j < ENDOF_LENGTH; j++) {
 			switch (gameBoard[i*j]) {
+				case 'R':
+				case 'r':
+					_pieces[i][j] = new Rook(gameBoard[i*j]);
 
-			}
+				}
 			//_pieces[i][j] = new ;
 		}
 	}

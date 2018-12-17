@@ -3,6 +3,7 @@
 #include "SideFunctions.h"
 #include <string>
 #include "SideFunctions.h"
+#include "Rook.h"
 
 class Board
 {

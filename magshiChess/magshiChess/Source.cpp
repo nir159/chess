@@ -1,6 +1,7 @@
 #include "Pipe.h"
 #include <iostream>
 #include <thread>
+#include "Board.h"
 
 using namespace std;
 void main()
@@ -34,22 +35,23 @@ void main()
 
 	char msgToGraphics[1024];
 	// msgToGraphics should contain the board string accord the protocol
-	// YOUR CODE
 
-	strcpy_s(msgToGraphics, "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1"); // just example...
-	
+	//strcpy_s(msgToGraphics, "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1"); // just example...
+	strcpy_s(msgToGraphics, "krrrrrrrrrrrrrrr################################RRRRRRRRRRRRRRRK1"); // just example...
 	p.sendMessageToGraphics(msgToGraphics);   // send the board string
-
+	Board game(msgToGraphics);
 	// get message from graphics
 	string msgFromGraphics = p.getMessageFromGraphics();
-
+	game.setInstruction(msgFromGraphics);
 	while (msgFromGraphics != "quit")
 	{
 		// should handle the string the sent from graphics
 		// according the protocol. Ex: e2e4           (move e2 to e4)
 		
-		// YOUR CODE
-		strcpy_s(msgToGraphics, "YOUR CODE"); // msgToGraphics should contain the result of the operation
+		if (game.isValidRange() && game.isReachable()) {
+			strcpy_s(msgToGraphics, "0"); // msgToGraphics should contain the result of the operation
+		}
+		strcpy_s(msgToGraphics, "1"); // msgToGraphics should contain the result of the operation
 
 
 

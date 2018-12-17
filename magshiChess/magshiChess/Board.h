@@ -4,6 +4,7 @@
 #include <string>
 #include "SideFunctions.h"
 #include "Rook.h"
+#include "King.h"
 
 class Board
 {

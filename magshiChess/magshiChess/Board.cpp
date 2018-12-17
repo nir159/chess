@@ -10,7 +10,11 @@ Board::Board(std::string gameBoard) : _currPlayer(WHITE_PLAYER), _instruction(""
 				case 'R':
 				case 'r':
 					_pieces[i][j] = new Rook(gameBoard[i*j]);
-
+					break;
+				case 'K':
+				case 'k':
+					_pieces[i][j] = new King(gameBoard[i*j]);
+					break;
 				}
 			//_pieces[i][j] = new ;
 		}

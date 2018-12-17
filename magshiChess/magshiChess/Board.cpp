@@ -4,7 +4,7 @@
 Board::Board(std::string gameBoard) : _currPlayer(WHITE_PLAYER), _instruction("")
 {
 	int i = 0, j = 0;
-	for (i = ENDOF_LENGTH; i > 0; i--) {
+	for (i = ENDOF_LENGTH - ONE; i >= 0; i--) {
 		for (j = 0; j < ENDOF_LENGTH; j++) {
 			switch (gameBoard[i*j]) {
 				case 'R':
@@ -117,7 +117,7 @@ Output:
 	if the Instruction can be committed then return true, else false
 */
 bool Board::isReachable() const {
-	if (_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND]]->moveFormat(_instruction) && !(_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND]]->hasSkippedPlayers(_instruction, _pieces))) { return true; }
+	if (_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND] - ONE]->moveFormat(_instruction) && !(_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND] - ONE]->hasSkippedPlayers(_instruction, _pieces))) { return true; }
 	return false;
 }
 

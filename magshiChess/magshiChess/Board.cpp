@@ -5,11 +5,10 @@ function will construct an Board object
 input:
 	gameBoard - field value to set
 */
-Board::Board(std::string gameBoard) : _currPlayer(WHITE_PLAYER), _instruction("")
+Board::Board(std::string gameBoard) : _currPlayer(BLACK_PLAYER), _instruction("")
 {
-	int i = 0, j = 0, counter = 0;
+	int i = 0, j = 0, counter = 7;
 	for (i = ENDOF_BOARD; i >= 0; i--) {
-		std::cout << gameBoard[i];
 		/* creates Pieces on Object's _pieces array field based on gameBoard parameter */
 		switch (gameBoard[i]) {
 			case 'R':
@@ -25,7 +24,7 @@ Board::Board(std::string gameBoard) : _currPlayer(WHITE_PLAYER), _instruction(""
 		} //_pieces[i][j] = new ;
 		j++;
 		if (j == ENDOF_LENGTH - ONE) {
-			counter++;
+			counter--;
 			j = 0;
 		}
 	}
@@ -70,8 +69,16 @@ Output:
 	if the current player have a piece in the source tile then return true, else false
 */
 bool Board::pieceExists() const {
-	if (_currPlayer == WHITE_PLAYER && SideFunctions::whichPlayer((*_pieces[_instruction[FIRST] - 'a'][_instruction[SECOND]]).getType()) == WHITE_PLAYER) { return true; }
-	else if (SideFunctions::whichPlayer((*_pieces[_instruction[FIRST] - 'a'][_instruction[SECOND]]).getType()) == BLACK_PLAYER) { return true; }
+	//int i = 0, j = 0;
+	for (i = 0; i < 8; i++) {
+		for (j = 0; j < 8; j++) {
+			std::cout << _pieces[i][j]->getType();
+		}
+		std::cout << std::endl;
+	}
+	std::cout << _pieces[1][3]->getType() << std::endl << _pieces[_instruction[SECOND] - STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P1]->getType();
+	if (_currPlayer == WHITE_PLAYER && SideFunctions::whichPlayer((_pieces[_instruction[SECOND] - STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P1])->getType()) == WHITE_PLAYER) { return true; }
+	else if (SideFunctions::whichPlayer((_pieces[_instruction[SECOND] - STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P1])->getType()) == BLACK_PLAYER) { return true; }
 	return false;
 }
 
@@ -141,4 +148,29 @@ Output:
 void Board::setInstruction(std::string instruction)
 {
 	this->_instruction = instruction;
+}
+
+/*
+Function will set the _currPlayer field
+Input:
+player - player to set
+Output:
+[Void]
+*/
+void Board::setPlayer(int player)
+{
+	if (player == ONE || player == TWO) {
+		this->_currPlayer = player;
+	}
+}
+
+/*
+Function will return the _currPlayer field
+Input:
+[Void]
+Output:
+_currPlayer - the current player
+*/
+int Board::getPlayer() {
+	return _currPlayer;
 }

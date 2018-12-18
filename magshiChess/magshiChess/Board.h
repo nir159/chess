@@ -25,6 +25,8 @@ public:
 	bool isSame() const;
 	void makeMove();
 	void setInstruction(std::string instruction);
+	void setPlayer(int player);
+	int getPlayer();
 	~Board();
 };
 

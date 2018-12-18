@@ -42,15 +42,19 @@ void main()
 	Board game(msgToGraphics);
 	// get message from graphics
 	string msgFromGraphics = p.getMessageFromGraphics();
-	
+
 	while (msgFromGraphics != "quit")
 	{
 		// should handle the string the sent from graphics
 		// according the protocol. Ex: e2e4           (move e2 to e4)
 		game.setInstruction(msgFromGraphics);
-		if (game.isValidRange() && game.isReachable()) {
+		if (game.isValidRange() && !game.isSame() && game.pieceExists()) {
 			strcpy_s(msgToGraphics, "0"); // msgToGraphics should contain the result of the operation
+			game.setPlayer(SideFunctions::changePlayer(game.getPlayer()));
 		}
+		/*if (game.isSame()) {
+			strcpy_s(msgToGraphics, "7"); // msgToGraphics should contain the result of the operation
+		}*/
 		else {
 			strcpy_s(msgToGraphics, "YOUR CODE"); // msgToGraphics should contain the result of the operation
 		}
@@ -64,6 +68,7 @@ void main()
 
 		// get message from graphics
 		msgFromGraphics = p.getMessageFromGraphics();
+
 	}
 
 	p.close();

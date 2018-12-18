@@ -4,6 +4,7 @@
 #define STARTOF_WIDTH 'a'
 #define ENDOF_WIDTH 'h'
 #define ONE 1
+#define TWO 2
 
 #define BLANK_PLAYER 0
 #define WHITE_PLAYER 1
@@ -12,6 +13,7 @@
 #define STARTOF_LENGTH 1
 #define STARTOF_LENGTH_CHAR '1'
 #define ENDOF_LENGTH 8
+#define ENDOF_LINE 7
 
 #define STARTOF_TYPE_P1 'a'
 #define ENDOF_TYPE_P1 'z'
@@ -31,7 +33,7 @@ class SideFunctions
 {
 public:
 	static bool isInstructionValid(const char size);
-	static void changePlayer(int* length);
+	static int changePlayer(int player);
 	static int whichPlayer(const char width);
 };
 

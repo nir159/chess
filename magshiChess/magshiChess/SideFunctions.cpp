@@ -16,13 +16,13 @@ bool SideFunctions::isInstructionValid(const char size) {
 /*
 function will switch current player playing
 Input:
-	length - number that represents current player playing
+	player - number that represents current player playing
 Output:
-	if number in Instuction is valid return true, else return false
+	the opposite player
 */
-void SideFunctions::changePlayer(int* length) {
-	if (*length == WHITE_PLAYER) { *length = BLACK_PLAYER; }
-	else { *length = WHITE_PLAYER; }
+int SideFunctions::changePlayer(int player) {
+	if (player == WHITE_PLAYER) { return BLACK_PLAYER; }
+	else { return WHITE_PLAYER; }
 }
 
 /*

@@ -25,12 +25,6 @@ Board::Board(std::string gameBoard) : _currPlayer(BLACK_PLAYER), _instruction(""
 			last++;
 		}
 	}
-	for (i = 0; i < 8; i++) {
-		for (j = 0; j < 8; j++) {
-			std::cout << _pieces[i][j]->getType();
-		}
-		std::cout << std::endl;
-	}
 }
 
 
@@ -130,7 +124,7 @@ Output:
 	if the Instruction can be committed then return true, else false
 */
 bool Board::isReachable() const {
-	if (_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND] - STARTOF_LENGTH_CHAR]->moveFormat(_instruction) && !(_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND] - STARTOF_LENGTH_CHAR]->hasSkippedPlayers(_instruction, _pieces))) { return true; }
+	if (_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2]->moveFormat(_instruction) && !(_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2]->hasSkippedPlayers(_instruction, _pieces))) { return true; }
 	return false;
 }
 

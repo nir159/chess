@@ -27,6 +27,7 @@ public:
 	void setInstruction(std::string instruction);
 	void setPlayer(int player);
 	int getPlayer();
+	void switchPieces(Piece** src, Piece** dst);
 	~Board();
 };
 

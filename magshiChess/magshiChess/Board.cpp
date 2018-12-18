@@ -170,3 +170,14 @@ _currPlayer - the current player
 int Board::getPlayer() {
 	return _currPlayer;
 }
+
+void Board::switchPieces(Piece* src, Piece* dst) {
+	Piece* temp = src;
+
+	src = dst;
+	dst = temp;
+
+	this->_pieces[this->_instruction[FIRST] - STARTOF_WIDTH][this->_instruction[SECOND] - STARTOF_LENGTH_CHAR] = src;
+	this->_pieces[this->_instruction[THIRD] - STARTOF_WIDTH][this->_instruction[FORTH] - STARTOF_LENGTH_CHAR] = dst;
+}
+

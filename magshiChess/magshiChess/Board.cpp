@@ -7,25 +7,22 @@ input:
 */
 Board::Board(std::string gameBoard) : _currPlayer(BLACK_PLAYER), _instruction("")
 {
-	int i = 0, j = 0, counter = 7;
-	for (i = ENDOF_BOARD; i >= 0; i--) {
-		/* creates Pieces on Object's _pieces array field based on gameBoard parameter */
-		switch (gameBoard[i]) {
-			case 'R':
-			case 'r':
-				_pieces[counter][j] = new Rook(gameBoard[i]);
-				break;
-			case 'K':
-			case 'k':
-				_pieces[counter][j] = new King(gameBoard[i]);
-				break;
-			default:
-				_pieces[counter][j] = new Blank();
-		} //_pieces[i][j] = new ;
-		j++;
-		if (j == ENDOF_LENGTH - ONE) {
-			counter--;
-			j = 0;
+	int i = 0, j = 0, last = ENDOF_BOARD;
+	for (i = 0; i < 8; i++) {
+		for (j = 0; j < 8; j++) {
+			switch (gameBoard[last]) {
+				case 'R':
+				case 'r':
+					_pieces[i][j] = new Rook(gameBoard[i]);
+					break;
+				case 'K':
+				case 'k':
+					_pieces[i][j] = new King(gameBoard[i]);
+					break;
+				default:
+					_pieces[i][j] = new Blank();
+			}
+			last--;
 		}
 	}
 }
@@ -69,14 +66,7 @@ Output:
 	if the current player have a piece in the source tile then return true, else false
 */
 bool Board::pieceExists() const {
-	//int i = 0, j = 0;
-	for (i = 0; i < 8; i++) {
-		for (j = 0; j < 8; j++) {
-			std::cout << _pieces[i][j]->getType();
-		}
-		std::cout << std::endl;
-	}
-	std::cout << _pieces[1][3]->getType() << std::endl << _pieces[_instruction[SECOND] - STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P1]->getType();
+	//std::cout << _pieces[1][3]->getType() << std::endl << _pieces[_instruction[SECOND] - STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P1]->getType();
 	if (_currPlayer == WHITE_PLAYER && SideFunctions::whichPlayer((_pieces[_instruction[SECOND] - STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P1])->getType()) == WHITE_PLAYER) { return true; }
 	else if (SideFunctions::whichPlayer((_pieces[_instruction[SECOND] - STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P1])->getType()) == BLACK_PLAYER) { return true; }
 	return false;

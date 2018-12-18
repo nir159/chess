@@ -165,6 +165,13 @@ int Board::getPlayer() {
 	return _currPlayer;
 }
 
+/*
+Function will switch between 2 Pieces on game board
+Input:
+	src, dst - Pieces to switch between on game board
+Output:
+	[Void]
+*/
 void Board::switchPieces(Piece* src, Piece* dst) {
 	Piece* temp = src;
 

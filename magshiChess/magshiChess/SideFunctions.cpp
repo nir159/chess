@@ -8,7 +8,7 @@ Output:
 	if Instuction is valid return true, else return false
 */
 bool SideFunctions::isInstructionValid(const char size) {
-	if (size >= STARTOF_LENGTH && size <= ENDOF_LENGTH) { return true; }
+	if (size >= ZERO && size <= ENDOF_LENGTH) { return true; }
 	return false;
 }
 

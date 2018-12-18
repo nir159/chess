@@ -3,26 +3,28 @@
 #include <iostream>
 #define STARTOF_WIDTH 'a'
 #define ENDOF_WIDTH 'h'
+#define ZERO 0
 #define ONE 1
 #define TWO 2
 
 #define BLANK_PLAYER 0
-#define WHITE_PLAYER 1
-#define BLACK_PLAYER 2
+#define BLACK_PLAYER 1
+#define WHITE_PLAYER 2
+
 
 #define STARTOF_LENGTH 1
 #define STARTOF_LENGTH_CHAR '1'
 #define ENDOF_LENGTH 8
 #define ENDOF_LINE 7
 
-#define STARTOF_TYPE_P1 'a'
-#define ENDOF_TYPE_P1 'z'
+#define STARTOF_TYPE_P1 'A'
+#define ENDOF_TYPE_P1 'Z'
 
-#define STARTOF_TYPE_P2 'A'
-#define ENDOF_TYPE_P2 'Z'
+#define STARTOF_TYPE_P2 'a'
+#define ENDOF_TYPE_P2 'z'
 #define BLANK '#'
-#define BLACK_KING 'K'
-#define WHITE_KING 'k'
+#define BLACK_KING 'k'
+#define WHITE_KING 'K'
 
 #define INSTRUCTION_LEN 4
 #define PIECES_PER_PLAYER 16

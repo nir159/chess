@@ -7,23 +7,29 @@ input:
 */
 Board::Board(std::string gameBoard) : _currPlayer(BLACK_PLAYER), _instruction("")
 {
-	int i = 0, j = 0, last = ENDOF_BOARD;
+	int i = 0, j = 0, last = 0;
 	for (i = 0; i < 8; i++) {
 		for (j = 0; j < 8; j++) {
 			switch (gameBoard[last]) {
 				case 'R':
 				case 'r':
-					_pieces[i][j] = new Rook(gameBoard[i]);
+					_pieces[i][j] = new Rook(gameBoard[last]);
 					break;
 				case 'K':
 				case 'k':
-					_pieces[i][j] = new King(gameBoard[i]);
+					_pieces[i][j] = new King(gameBoard[last]);
 					break;
 				default:
 					_pieces[i][j] = new Blank();
 			}
-			last--;
+			last++;
 		}
+	}
+	for (i = 0; i < 8; i++) {
+		for (j = 0; j < 8; j++) {
+			std::cout << _pieces[i][j]->getType();
+		}
+		std::cout << std::endl;
 	}
 }
 
@@ -40,7 +46,7 @@ Output:
 	if Instuction is in the correct format and the parameters in it are in the valid range then return true, else return false
 */
 bool Board::isValidRange() const {
-	if (SideFunctions::isInstructionValid(_instruction[FIRST] - STARTOF_WIDTH + ONE) && SideFunctions::isInstructionValid(_instruction[SECOND] - STARTOF_LENGTH_CHAR + ONE) && SideFunctions::isInstructionValid(_instruction[THIRD] - STARTOF_WIDTH + ONE) && SideFunctions::isInstructionValid(_instruction[FORTH] - STARTOF_LENGTH_CHAR + ONE)) { // checks if instuction is in a valid format
+	if (SideFunctions::isInstructionValid(_instruction[FIRST] - STARTOF_WIDTH) && SideFunctions::isInstructionValid(_instruction[SECOND] - STARTOF_LENGTH_CHAR) && SideFunctions::isInstructionValid(_instruction[THIRD] - STARTOF_WIDTH) && SideFunctions::isInstructionValid(_instruction[FORTH] - STARTOF_LENGTH_CHAR)) { // checks if instuction is in a valid format
 		return true;
 	}
 	return false;
@@ -66,9 +72,9 @@ Output:
 	if the current player have a piece in the source tile then return true, else false
 */
 bool Board::pieceExists() const {
-	//std::cout << _pieces[1][3]->getType() << std::endl << _pieces[_instruction[SECOND] - STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P1]->getType();
-	if (_currPlayer == WHITE_PLAYER && SideFunctions::whichPlayer((_pieces[_instruction[SECOND] - STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P1])->getType()) == WHITE_PLAYER) { return true; }
-	else if (SideFunctions::whichPlayer((_pieces[_instruction[SECOND] - STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P1])->getType()) == BLACK_PLAYER) { return true; }
+	std::cout << _pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2]->getType() << std::endl << _pieces[1][2]->getType();
+	if (_currPlayer == WHITE_PLAYER && SideFunctions::whichPlayer((_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2])->getType()) == WHITE_PLAYER) { return true; }
+	else if (SideFunctions::whichPlayer((_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2])->getType()) == BLACK_PLAYER) { return true; }
 	return false;
 }
 
@@ -80,8 +86,8 @@ Output:
 	if the current player have a piece in the destination tile then return true, else false
 */
 bool Board::noPiece() const {
-	if (_currPlayer == WHITE_PLAYER && (SideFunctions::whichPlayer((*_pieces[_instruction[THIRD] - 'a'][_instruction[FORTH]]).getType()) == WHITE_PLAYER)) { return false; }
-	else if (SideFunctions::whichPlayer((*_pieces[_instruction[THIRD] - 'a'][_instruction[FORTH]]).getType()) == BLACK_PLAYER) { return false; }
+	if (_currPlayer == WHITE_PLAYER && (SideFunctions::whichPlayer((_pieces[_instruction[THIRD] - 'a'][_instruction[FORTH]])->getType()) == WHITE_PLAYER)) { return false; }
+	else if (SideFunctions::whichPlayer((_pieces[_instruction[THIRD] - 'a'][_instruction[FORTH]])->getType()) == BLACK_PLAYER) { return false; }
 	return true;
 }
 

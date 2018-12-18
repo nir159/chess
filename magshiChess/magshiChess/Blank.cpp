@@ -17,3 +17,7 @@ bool Blank::moveFormat(std::string str) {
 	// can't move
 	return false;
 }
+
+bool Blank::hasSkippedPlayers(std::string instruction, Piece* const gameBoard[ENDOF_LENGTH][ENDOF_LENGTH]) {
+	return false;
+}

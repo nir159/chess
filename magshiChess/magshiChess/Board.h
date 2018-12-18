@@ -5,6 +5,7 @@
 #include "SideFunctions.h"
 #include "Rook.h"
 #include "King.h"
+#include "Blank.h"
 
 class Board
 {

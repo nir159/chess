@@ -24,6 +24,7 @@
 
 #define INSTRUCTION_LEN 4
 #define PIECES_PER_PLAYER 16
+#define ENDOF_BOARD 63
 enum INSTRUCTION { FIRST, SECOND, THIRD, FORTH };
 
 class SideFunctions

@@ -7,20 +7,26 @@ input:
 */
 Board::Board(std::string gameBoard) : _currPlayer(WHITE_PLAYER), _instruction("")
 {
-	int i = 0, j = 0;
-	for (i = ENDOF_LENGTH - ONE; i >= 0; i--) {
-		for (j = 0; j < ENDOF_LENGTH; j++) {
-			/* creates Pieces on Object's _pieces array field based on gameBoard parameter */
-			switch (gameBoard[i*j]) {
-				case 'R':
-				case 'r':
-					_pieces[i][j] = new Rook(gameBoard[i*j]);
-					break;
-				case 'K':
-				case 'k':
-					_pieces[i][j] = new King(gameBoard[i*j]);
-					break;
-			} //_pieces[i][j] = new ;
+	int i = 0, j = 0, counter = 0;
+	for (i = ENDOF_BOARD; i >= 0; i--) {
+		std::cout << gameBoard[i];
+		/* creates Pieces on Object's _pieces array field based on gameBoard parameter */
+		switch (gameBoard[i]) {
+			case 'R':
+			case 'r':
+				_pieces[counter][j] = new Rook(gameBoard[i]);
+				break;
+			case 'K':
+			case 'k':
+				_pieces[counter][j] = new King(gameBoard[i]);
+				break;
+			default:
+				_pieces[counter][j] = new Blank();
+		} //_pieces[i][j] = new ;
+		j++;
+		if (j == ENDOF_LENGTH - ONE) {
+			counter++;
+			j = 0;
 		}
 	}
 }
@@ -121,7 +127,7 @@ Output:
 	if the Instruction can be committed then return true, else false
 */
 bool Board::isReachable() const {
-	if (_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND] - ONE]->moveFormat(_instruction) && !(_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND] - ONE]->hasSkippedPlayers(_instruction, _pieces))) { return true; }
+	if (_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND] - STARTOF_LENGTH_CHAR]->moveFormat(_instruction) && !(_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND] - STARTOF_LENGTH_CHAR]->hasSkippedPlayers(_instruction, _pieces))) { return true; }
 	return false;
 }
 

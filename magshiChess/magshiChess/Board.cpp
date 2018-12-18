@@ -74,7 +74,7 @@ Output:
 bool Board::pieceExists() const {
 	std::cout << _pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2]->getType() << std::endl << _pieces[1][2]->getType();
 	if (_currPlayer == WHITE_PLAYER && SideFunctions::whichPlayer((_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2])->getType()) == WHITE_PLAYER) { return true; }
-	else if (SideFunctions::whichPlayer((_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2])->getType()) == BLACK_PLAYER) { return true; }
+	else if (_currPlayer == BLACK_PLAYER && SideFunctions::whichPlayer((_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2])->getType()) == BLACK_PLAYER) { return true; }
 	return false;
 }
 

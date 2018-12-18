@@ -59,7 +59,7 @@ void main()
 			strcpy_s(msgToGraphics, "YOUR CODE"); // msgToGraphics should contain the result of the operation
 		}
 		
-
+		std::cout << game.getPlayer();
 
 
 

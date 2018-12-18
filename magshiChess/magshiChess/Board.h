@@ -21,9 +21,8 @@ public:
 	bool isChess() const;
 	bool isReachable() const;
 	void isSelfChess();
-	void eat();
 	bool isSame() const;
-	void makeMove();
+	void makeMove() const;
 	void setInstruction(std::string instruction);
 	void setPlayer(int player);
 	int getPlayer();

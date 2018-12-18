@@ -37,7 +37,7 @@ void main()
 	// msgToGraphics should contain the board string accord the protocol
 
 	//strcpy_s(msgToGraphics, "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1"); // just example...
-	strcpy_s(msgToGraphics, "krrrrrrrrrrrrrrr################################KRRRRRRRRRRRRRRR1"); // just example...
+	strcpy_s(msgToGraphics, "krrrrrrrrkrrkrrr################################KRRRRRRRRRRRKRKR1"); // just example...
 	p.sendMessageToGraphics(msgToGraphics);   // send the board string
 	Board game(msgToGraphics);
 	// get message from graphics
@@ -48,17 +48,19 @@ void main()
 		// should handle the string the sent from graphics
 		// according the protocol. Ex: e2e4           (move e2 to e4)
 		game.setInstruction(msgFromGraphics);
-		if (game.isValidRange() && !game.isSame() && game.pieceExists()) {
-			strcpy_s(msgToGraphics, "0"); // msgToGraphics should contain the result of the operation
-			game.setPlayer(SideFunctions::changePlayer(game.getPlayer()));
+		if (!game.isValidRange()) {
+			strcpy_s(msgToGraphics, "5");
 		}
-		/*if (game.isSame()) {
-			strcpy_s(msgToGraphics, "7"); // msgToGraphics should contain the result of the operation
-		}*/
+		else if (!game.isReachable()) {
+			strcpy_s(msgToGraphics, "6");
+		}
+		else if (game.isSame()) {
+			strcpy_s(msgToGraphics, "7");
+		}
 		else {
-			strcpy_s(msgToGraphics, "YOUR CODE"); // msgToGraphics should contain the result of the operation
+			strcpy_s(msgToGraphics, "0"); // msgToGraphics should contain the result of the operation
 		}
-		
+		game.setPlayer(SideFunctions::changePlayer(game.getPlayer()));
 		std::cout << game.getPlayer();
 
 

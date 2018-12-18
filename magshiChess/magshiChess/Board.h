@@ -17,15 +17,16 @@ public:
 	Board(std::string gameBoard);
 	bool isValidRange() const;
 	bool pieceExists() const;
-	bool noPiece() const;
+	bool isPiece() const;
 	bool isChess() const;
-	bool isReachable() const;
+	bool isReachable();
 	void isSelfChess();
 	bool isSame() const;
 	void makeMove() const;
 	void setInstruction(std::string instruction);
 	void setPlayer(int player);
 	int getPlayer();
+	void switchPieces(Piece* src, Piece* dst);
 	~Board();
 };
 

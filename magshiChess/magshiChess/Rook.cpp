@@ -61,9 +61,8 @@ bool Rook::hasSkippedPlayers(std::string instruction, Piece* const gameBoard[END
 		MaxRange = instruction[FORTH] - STARTOF_LENGTH_CHAR;
 	}
 	for (i = minRange + ONE; i < MaxRange; i++) { // runs on requested Range & Side in game gameBoard
-		std::cout << gameBoard[instruction[FIRST] - STARTOF_TYPE_P2][i]->getType();
 		if (rightSide && gameBoard[ENDOF_LINE - i][instruction[FIRST] - STARTOF_TYPE_P2]->getType() != BLANK) { /* checks if Side is Length (Right Side) && if it is check if at Length Piece skips any Other Pieces */ return true; }
-		else if (!rightSide && gameBoard[ENDOF_LINE - instruction[SECOND] + STARTOF_LENGTH_CHAR][i - ONE]->getType() != BLANK) { /* else if it is check if at Width Piece skips any Other Pieces */ return true; }
+		else if (!rightSide && gameBoard[ENDOF_LINE - instruction[SECOND] + STARTOF_LENGTH_CHAR][i]->getType() != BLANK) { /* else if it is check if at Width Piece skips any Other Pieces */ return true; }
 	}
 	return false;
 }

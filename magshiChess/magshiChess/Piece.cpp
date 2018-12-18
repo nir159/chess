@@ -22,3 +22,14 @@ Output:
 char Piece::getType() {
 	return this->_type;
 }
+
+/*
+Function will set the Piece class' type field
+Input:
+the type
+Output:
+[None]
+*/
+void Piece::setType(char type) {
+	this->_type = type;
+}

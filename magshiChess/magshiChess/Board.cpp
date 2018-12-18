@@ -66,7 +66,6 @@ Output:
 	if the current player have a piece in the source tile then return true, else false
 */
 bool Board::pieceExists() const {
-	std::cout << _pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2]->getType() << std::endl << _pieces[1][2]->getType();
 	if (_currPlayer == WHITE_PLAYER && SideFunctions::whichPlayer((_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2])->getType()) == WHITE_PLAYER) { return true; }
 	else if (_currPlayer == BLACK_PLAYER && SideFunctions::whichPlayer((_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2])->getType()) == BLACK_PLAYER) { return true; }
 	return false;
@@ -79,9 +78,9 @@ Input:
 Output:
 	if the current player have a piece in the destination tile then return true, else false
 */
-bool Board::noPiece() const {
-	if (_currPlayer == WHITE_PLAYER && (SideFunctions::whichPlayer((_pieces[_instruction[THIRD] - 'a'][_instruction[FORTH]])->getType()) == WHITE_PLAYER)) { return false; }
-	else if (SideFunctions::whichPlayer((_pieces[_instruction[THIRD] - 'a'][_instruction[FORTH]])->getType()) == BLACK_PLAYER) { return false; }
+bool Board::isPiece() const {
+	if (_currPlayer == WHITE_PLAYER && (SideFunctions::whichPlayer((_pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2])->getType()) == WHITE_PLAYER)) { return false; }
+	else if (_currPlayer == BLACK_PLAYER && (SideFunctions::whichPlayer((_pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2])->getType()) == BLACK_PLAYER)) { return false; }
 	return true;
 }
 
@@ -123,8 +122,18 @@ Input:
 Output:
 	if the Instruction can be committed then return true, else false
 */
-bool Board::isReachable() const {
-	if (_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2]->moveFormat(_instruction) && !(_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2]->hasSkippedPlayers(_instruction, _pieces))) { return true; }
+bool Board::isReachable() {
+	if (_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2]->moveFormat(_instruction) && !(_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2]->hasSkippedPlayers(_instruction, _pieces))) {
+		_pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]->setType('#');
+		switchPieces(_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2], _pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]);
+		for (int i = 0; i < ENDOF_LENGTH; i++) {
+			for (int j = 0; j < ENDOF_LENGTH; j++) {
+				std::cout << _pieces[i][j]->getType();
+			}
+			std::cout << std::endl;
+		}
+		return true;
+	}
 	return false;
 }
 
@@ -163,4 +172,20 @@ _currPlayer - the current player
 */
 int Board::getPlayer() {
 	return _currPlayer;
+}
+
+/*
+Function will switch between 2 Pieces on game board
+Input:
+src, dst - Pieces to switch between on game board
+Output:
+[Void]
+*/
+void Board::switchPieces(Piece* src, Piece* dst) {
+	Piece* temp = src;
+
+	src = dst;
+	dst = temp;
+	this->_pieces[ENDOF_LINE - this->_instruction[SECOND] + STARTOF_LENGTH_CHAR][this->_instruction[FIRST] - STARTOF_WIDTH] = src;
+	this->_pieces[ENDOF_LINE - this->_instruction[FORTH] + STARTOF_LENGTH_CHAR][this->_instruction[THIRD] - STARTOF_WIDTH] = dst;
 }

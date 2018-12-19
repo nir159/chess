@@ -54,9 +54,9 @@ void main()
 		else if (!game.isPiece()) {
 			strcpy_s(msgToGraphics, "3");
 		}
-		/*if (!game.pieceExists()) {
-		strcpy_s(msgToGraphics, "4"); selfChess
-		}*/
+		else if (game.isSelfChess()) {
+			strcpy_s(msgToGraphics, "4");
+		}
 		else if (!game.isValidRange()) {
 			strcpy_s(msgToGraphics, "5");
 		}
@@ -70,6 +70,7 @@ void main()
 			strcpy_s(msgToGraphics, "0");
 			if (game.isChess()) {
 				strcpy_s(msgToGraphics, "1");
+				game.switchIsChess();
 			}
 			game.setPlayer(SideFunctions::changePlayer(game.getPlayer()));
 		}

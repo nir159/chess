@@ -21,12 +21,13 @@ public:
 	bool isPiece() const;
 	bool isChess() const;
 	bool isReachable();
-	void isSelfChess();
+	bool isSelfChess() const;
 	bool isSame() const;
 	void setInstruction(std::string instruction);
 	void setPlayer(int player);
 	int getPlayer();
 	void switchPieces(Piece* src, Piece* dst);
+	void switchIsChess();
 	~Board();
 };
 

@@ -197,3 +197,18 @@ void Board::switchPieces(Piece* src, Piece* dst) {
 	this->_pieces[ENDOF_LINE - this->_instruction[SECOND] + STARTOF_LENGTH_CHAR][this->_instruction[FIRST] - STARTOF_WIDTH] = src;
 	this->_pieces[ENDOF_LINE - this->_instruction[FORTH] + STARTOF_LENGTH_CHAR][this->_instruction[THIRD] - STARTOF_WIDTH] = dst;
 }
+
+void Board::switchIsChess() {
+	if (_isChess) {
+		_isChess = false;
+	}
+	else {
+		_isChess = true;
+	}
+}
+
+bool Board::isSelfChess() const {
+
+
+	return false;
+}

@@ -5,7 +5,7 @@ function will construct an Board object
 input:
 	gameBoard - field value to set
 */
-Board::Board(std::string gameBoard) : _currPlayer(BLACK_PLAYER), _instruction("")
+Board::Board(std::string gameBoard) : _currPlayer(BLACK_PLAYER), _instruction(""), _isChess(false)
 {
 	int i = 0, j = 0, last = 0;
 	for (i = 0; i < 8; i++) {
@@ -93,13 +93,20 @@ Output:
 */
 bool Board::isChess() const {
 	int i = 0, j = 0;
-	std::string distance = ""; // distance from new position to king
+	std::string newInstruction = ""; // distance from new position to king
 
 	if (_currPlayer == WHITE_PLAYER) { // checks if current player is White
 		/* runs on game board */
 		for (i = 0; i < ENDOF_LENGTH; i++) {
 			for (j = 0; j < ENDOF_LENGTH; j++) {
-				if (_pieces[i][j]->getType() == BLACK_KING) { /* checks if current piece on board is opponent King piece */ distance += _instruction[THIRD] + _instruction[FORTH] + (char)i + STARTOF_TYPE_P1 + j; /* if it is save last dest + King loc in a new instruction */ }
+				if (_pieces[i][j]->getType() == BLACK_KING) {
+					/* checks if current piece on board is opponent King piece */
+					newInstruction += _instruction[THIRD];
+					newInstruction += _instruction[FORTH];
+					newInstruction += (char)(j + STARTOF_TYPE_P2);
+					newInstruction += (char)((ENDOF_LINE - i) + STARTOF_LENGTH_CHAR);
+					/* if it is save last dest + King loc in a new instruction */
+				}
 			}
 		}
 	}
@@ -107,11 +114,18 @@ bool Board::isChess() const {
 		/* runs on game board */
 		for (i = 0; i < ENDOF_LENGTH; i++) {
 			for (j = 0; j < ENDOF_LENGTH; j++) {
-				if (_pieces[i][j]->getType() == WHITE_KING) { /* checks if current piece on board is opponent King piece */ distance += _instruction[THIRD] + _instruction[FORTH] + (char)i + STARTOF_TYPE_P1 + j; /* if it is save last dest + King loc in a new instruction */ }
+				if (_pieces[i][j]->getType() == WHITE_KING) {
+					/* checks if current piece on board is opponent King piece */
+					newInstruction += _instruction[THIRD];
+					newInstruction += _instruction[FORTH]; 
+					newInstruction += (char)(j + STARTOF_TYPE_P2);
+					newInstruction += (char)((ENDOF_LINE - i) + STARTOF_LENGTH_CHAR);
+					 /* if it is save last dest + King loc in a new instruction */ 
+				}
 			}
 		}
 	}
-	if (_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND]]->moveFormat(distance) && !(_pieces[_instruction[FIRST] - STARTOF_TYPE_P1][_instruction[SECOND]]->hasSkippedPlayers(distance, _pieces))) { /* checks if the piece threatens the king */ return true; }
+	if (_pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]->moveFormat(newInstruction) && !(_pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]->hasSkippedPlayers(newInstruction, _pieces))) { /* checks if the piece threatens the king */ return true; }
 	return false;
 }
 
@@ -126,12 +140,6 @@ bool Board::isReachable() {
 	if (_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2]->moveFormat(_instruction) && !(_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2]->hasSkippedPlayers(_instruction, _pieces))) {
 		_pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]->setType('#');
 		switchPieces(_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2], _pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]);
-		for (int i = 0; i < ENDOF_LENGTH; i++) {
-			for (int j = 0; j < ENDOF_LENGTH; j++) {
-				std::cout << _pieces[i][j]->getType();
-			}
-			std::cout << std::endl;
-		}
 		return true;
 	}
 	return false;

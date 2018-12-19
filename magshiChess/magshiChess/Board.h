@@ -13,6 +13,7 @@ private:
 	Piece* _pieces[ENDOF_LENGTH][ENDOF_LENGTH];
 	std::string _instruction;
 	int _currPlayer;
+	bool _isChess;
 public:
 	Board(std::string gameBoard);
 	bool isValidRange() const;
@@ -22,7 +23,6 @@ public:
 	bool isReachable();
 	void isSelfChess();
 	bool isSame() const;
-	void makeMove() const;
 	void setInstruction(std::string instruction);
 	void setPlayer(int player);
 	int getPlayer();

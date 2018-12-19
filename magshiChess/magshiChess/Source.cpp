@@ -48,9 +48,6 @@ void main()
 		// should handle the string the sent from graphics
 		// according the protocol. Ex: e2e4           (move e2 to e4)
 		game.setInstruction(msgFromGraphics);
-		/*if (!game.pieceExists()) {
-			strcpy_s(msgToGraphics, "1"); chess
-		}*/
 		if (!game.pieceExists()) {
 			strcpy_s(msgToGraphics, "2");
 		}
@@ -70,7 +67,10 @@ void main()
 			strcpy_s(msgToGraphics, "6");
 		}
 		else {
-			strcpy_s(msgToGraphics, "0"); // msgToGraphics should contain the result of the operation
+			strcpy_s(msgToGraphics, "0");
+			if (game.isChess()) {
+				strcpy_s(msgToGraphics, "1");
+			}
 			game.setPlayer(SideFunctions::changePlayer(game.getPlayer()));
 		}
 

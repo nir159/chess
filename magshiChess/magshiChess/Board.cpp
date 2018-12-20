@@ -138,8 +138,6 @@ Output:
 */
 bool Board::isReachable() {
 	if (_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2]->moveFormat(_instruction) && !(_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2]->hasSkippedPlayers(_instruction, _pieces))) {
-		_pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]->setType('#');
-		switchPieces(_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2], _pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]);
 		return true;
 	}
 	return false;
@@ -207,8 +205,26 @@ void Board::switchIsChess() {
 	}
 }
 
-bool Board::isSelfChess() const {
+bool Board::isSelfChess() {
+	int i = 0, j = 0;
+	Piece *temp[ENDOF_LENGTH][ENDOF_LENGTH];
+	for (i = 0; i < ENDOF_LENGTH; i++) {
+		for (j = 0; j < ENDOF_LENGTH; j++) {
+			temp[i][j] = _pieces[i][j];
+		}
+	}
 
+	for (i = 0; i < ENDOF_LENGTH; i++) {
+		for (j = 0; j < ENDOF_LENGTH; j++) {
+			if (_currPlayer == BLACK_PLAYER && SideFunctions::whichPlayer(_pieces[i][j]->getType()) == WHITE_PLAYER) {
 
+			}
+			else if (_currPlayer == WHITE_PLAYER && SideFunctions::whichPlayer(_pieces[i][j]->getType()) == BLACK_PLAYER) {
+
+			}
+		}
+	}
+	_pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]->setType('#');
+	switchPieces(_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2], _pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]);
 	return false;
 }

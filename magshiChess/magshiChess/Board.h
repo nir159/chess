@@ -21,7 +21,7 @@ public:
 	bool isPiece() const;
 	bool isChess() const;
 	bool isReachable();
-	bool isSelfChess() const;
+	bool isSelfChess();
 	bool isSame() const;
 	void setInstruction(std::string instruction);
 	void setPlayer(int player);

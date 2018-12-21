@@ -5,6 +5,7 @@ class Pawn :
 {
 public:
 	Pawn(char type);
+	bool moveFormat(std::string instruction);
 	~Pawn();
 };
 

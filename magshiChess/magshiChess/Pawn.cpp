@@ -22,6 +22,6 @@ Output:
 */
 bool Pawn::moveFormat(std::string instruction)
 {
-	if (instruction[FORTH] - instruction[SECOND] == ONE) { return true; }
+	if (instruction[FORTH] - instruction[SECOND] == ONE && instruction[FIRST] == instruction[THIRD]) { return true; }
 	return false;
 }

@@ -17,12 +17,21 @@ Pawn::~Pawn()
 function will check if Instruction is valid for current type of piece
 Input:
 	instruction - Instruction to check
+	isPlayerDst - if a player exists at destination
+	whiteTurn - if it's the white player turn
 Output:
 	if Instruction is valid for current type of piece then return true, else return false
 */
-bool Pawn::moveFormat(std::string instruction)
+bool Pawn::moveFormat(std::string instruction, bool isPlayerDst, int currTurn)
 {
-	if (instruction[FORTH] - instruction[SECOND] == ONE && instruction[FIRST] == instruction[THIRD]) { return true; }
+	if (currTurn == BLACK_PLAYER) {
+		if (instruction[SECOND] - instruction[FORTH] == ONE && instruction[FIRST] == instruction[THIRD] && !isPlayerDst) { return true; }
+		else if (instruction[SECOND] - instruction[FORTH] == ONE && (instruction[FIRST] - instruction[THIRD] == ONE || instruction[THIRD] - instruction[FIRST] == ONE) && isPlayerDst) { return true; }
+	}
+	else {
+		if (instruction[FORTH] - instruction[SECOND] == ONE && instruction[FIRST] == instruction[THIRD] && !isPlayerDst) { return true; }
+		else if (instruction[FORTH] - instruction[SECOND] == ONE && (instruction[FIRST] - instruction[THIRD] == ONE || instruction[THIRD] - instruction[FIRST] == ONE) && isPlayerDst) { return true; }
+	}
 	return false;
 }
 

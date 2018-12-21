@@ -18,10 +18,12 @@ Rook::~Rook()
 function will check if Instruction is valid for current type of piece
 Input:
 	instruction - Instruction to check
+	isPlayerDst - if a player exists at destination
+	whiteTurn - if it's the white player turn
 Output:
 	if Instruction is valid for current type of piece then return true, else return false
 */
-bool Rook::moveFormat(std::string instruction) {
+bool Rook::moveFormat(std::string instruction, bool isPlayerDst, int currTurn) {
 	if (instruction[FIRST] != instruction[THIRD] && instruction[SECOND] != instruction[FORTH]) { return false; }
 	return true;
 }

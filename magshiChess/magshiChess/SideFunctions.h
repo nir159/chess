@@ -25,6 +25,8 @@
 #define BLANK '#'
 #define BLACK_KING 'k'
 #define WHITE_KING 'K'
+#define BLACK_PAWN 'p'
+#define WHITE_PAWN 'P'
 
 #define INSTRUCTION_LEN 4
 #define PIECES_PER_PLAYER 16

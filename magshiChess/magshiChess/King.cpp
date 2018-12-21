@@ -17,10 +17,12 @@ King::~King()
 function will check if Instruction is valid for current type of piece
 Input:
 	instruction - Instruction to check
+	isPlayerDst - if a player exists at destination
+	whiteTurn - if it's the white player turn
 Output:
 	if Instruction is valid for current type of piece then return true, else return false
 */
-bool King::moveFormat(std::string instruction) {
+bool King::moveFormat(std::string instruction, bool isPlayerDst, int currTurn) {
 	if (abs(instruction[FIRST] - instruction[THIRD]) < TWO && abs(instruction[SECOND] - instruction[FORTH]) < TWO) { return true; }
 	return false;
 }

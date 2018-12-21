@@ -6,6 +6,7 @@
 #include "Rook.h"
 #include "King.h"
 #include "Blank.h"
+#include "Pawn.h"
 
 class Board
 {
@@ -13,13 +14,13 @@ private:
 	Piece* _pieces[ENDOF_LENGTH][ENDOF_LENGTH];
 	std::string _instruction;
 	int _currPlayer;
-	bool _isChess;
+	bool _isPlayerDst;
 public:
 	Board(std::string gameBoard);
 	bool isValidRange() const;
 	bool pieceExists() const;
 	bool isPiece() const;
-	bool isChess() const;
+	bool isChess();
 	bool isReachable();
 	bool isSelfChess();
 	bool isSame() const;
@@ -27,7 +28,7 @@ public:
 	void setPlayer(int player);
 	int getPlayer();
 	void switchPieces(Piece* src, Piece* dst);
-	void switchIsChess();
+	void setIsPlayerDst();
 	~Board();
 };
 

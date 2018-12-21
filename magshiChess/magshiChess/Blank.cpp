@@ -13,7 +13,7 @@ Blank::~Blank()
 {
 }
 
-bool Blank::moveFormat(std::string str) {
+bool Blank::moveFormat(std::string str, bool isPlayerDst, int currTurn) {
 	// can't move
 	return false;
 }

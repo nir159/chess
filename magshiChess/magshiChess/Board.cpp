@@ -5,7 +5,7 @@ function will construct an Board object
 input:
 	gameBoard - field value to set
 */
-Board::Board(std::string gameBoard) : _currPlayer(BLACK_PLAYER), _instruction(""), _isChess(false)
+Board::Board(std::string gameBoard) : _currPlayer(BLACK_PLAYER), _instruction(""), _isPlayerDst(false)
 {
 	int i = 0, j = 0, last = 0;
 	for (i = 0; i < 8; i++) {
@@ -18,6 +18,10 @@ Board::Board(std::string gameBoard) : _currPlayer(BLACK_PLAYER), _instruction(""
 				case 'K':
 				case 'k':
 					_pieces[i][j] = new King(gameBoard[last]);
+					break;
+				case 'P':
+				case 'p':
+					_pieces[i][j] = new Pawn(gameBoard[last]);
 					break;
 				default:
 					_pieces[i][j] = new Blank();
@@ -91,9 +95,10 @@ Input:
 Output:
 	if the current player have a done a move that will create a chess situation for opponent then return true, else false
 */
-bool Board::isChess() const {
+bool Board::isChess() {
 	int i = 0, j = 0;
 	std::string newInstruction = ""; // distance from new position to king
+	bool temp = _isPlayerDst;
 
 	if (_currPlayer == WHITE_PLAYER) { // checks if current player is White
 		/* runs on game board */
@@ -125,7 +130,18 @@ bool Board::isChess() const {
 			}
 		}
 	}
-	if (_pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]->moveFormat(newInstruction) && !(_pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]->hasSkippedPlayers(newInstruction, _pieces))) { /* checks if the piece threatens the king */ return true; }
+	if (_pieces[ENDOF_LINE - newInstruction[FORTH] + STARTOF_LENGTH_CHAR][newInstruction[THIRD] - STARTOF_TYPE_P2]->getType() != BLANK) {
+		_isPlayerDst = true;
+	}
+	else {
+		_isPlayerDst = false;
+	}
+	if (_pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]->moveFormat(newInstruction, _isPlayerDst, _currPlayer) && !(_pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]->hasSkippedPlayers(newInstruction, _pieces))) {
+		_isPlayerDst = temp;
+		/* checks if the piece threatens the king */ 
+		return true; 
+	}
+	_isPlayerDst = temp;
 	return false;
 }
 
@@ -137,7 +153,7 @@ Output:
 	if the Instruction can be committed then return true, else false
 */
 bool Board::isReachable() {
-	if (_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2]->moveFormat(_instruction) && !(_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2]->hasSkippedPlayers(_instruction, _pieces))) {
+	if (_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2]->moveFormat(_instruction, _isPlayerDst, _currPlayer) && !(_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2]->hasSkippedPlayers(_instruction, _pieces))) {
 		_pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]->setType('#');
 		switchPieces(_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2], _pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]);
 		return true;
@@ -198,20 +214,13 @@ void Board::switchPieces(Piece* src, Piece* dst) {
 	this->_pieces[ENDOF_LINE - this->_instruction[FORTH] + STARTOF_LENGTH_CHAR][this->_instruction[THIRD] - STARTOF_WIDTH] = dst;
 }
 
-void Board::switchIsChess() {
-	if (_isChess) {
-		_isChess = false;
-	}
-	else {
-		_isChess = true;
-	}
-}
-
 bool Board::isSelfChess() {
 	int i = 0, j = 0;
 	Piece* tempPiece;
 	std::string newInstruction = "";
 	Piece *temp[ENDOF_LENGTH][ENDOF_LENGTH];
+	bool tempIsPlayer = _isPlayerDst;
+
 	for (i = 0; i < ENDOF_LENGTH; i++) {
 		for (j = 0; j < ENDOF_LENGTH; j++) {
 			switch (_pieces[i][j]->getType()) {
@@ -223,12 +232,15 @@ bool Board::isSelfChess() {
 			case 'k':
 				temp[i][j] = new King(_pieces[i][j]->getType());
 				break;
+			case 'P':
+			case 'p':
+				temp[i][j] = new Pawn(_pieces[i][j]->getType());
+				break;
 			default:
 				temp[i][j] = new Blank();
 			}
 		}
 	}
-
 	temp[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]->setType('#');
 	tempPiece = temp[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2];
 	temp[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2] = temp[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2];
@@ -254,14 +266,44 @@ bool Board::isSelfChess() {
 			if (_currPlayer == BLACK_PLAYER && SideFunctions::whichPlayer(temp[i][j]->getType()) == WHITE_PLAYER) {
 				newInstruction[ZERO] = (char)(j + STARTOF_TYPE_P2);
 				newInstruction[ONE] = (char)((ENDOF_LINE - i) + STARTOF_LENGTH_CHAR);
-				if (temp[ENDOF_LINE - newInstruction[SECOND] + STARTOF_LENGTH_CHAR][newInstruction[FIRST] - STARTOF_TYPE_P2]->moveFormat(newInstruction) && !(temp[ENDOF_LINE - newInstruction[SECOND] + STARTOF_LENGTH_CHAR][newInstruction[FIRST] - STARTOF_TYPE_P2]->hasSkippedPlayers(newInstruction, temp))) { /* checks if the piece threatens the king */ return true; }
+				if (temp[ENDOF_LINE - newInstruction[FORTH] + STARTOF_LENGTH_CHAR][newInstruction[THIRD] - STARTOF_TYPE_P2]->getType() != BLANK) {
+					_isPlayerDst = true;
+				}
+				else {
+					_isPlayerDst = false;
+				}
+				if (temp[ENDOF_LINE - newInstruction[SECOND] + STARTOF_LENGTH_CHAR][newInstruction[FIRST] - STARTOF_TYPE_P2]->moveFormat(newInstruction, _isPlayerDst, _currPlayer) && !(temp[ENDOF_LINE - newInstruction[SECOND] + STARTOF_LENGTH_CHAR][newInstruction[FIRST] - STARTOF_TYPE_P2]->hasSkippedPlayers(newInstruction, temp))) {
+					_isPlayerDst = tempIsPlayer;
+					/* checks if the piece threatens the king */
+					return true; 
+				}
 			}
 			else if (_currPlayer == WHITE_PLAYER && SideFunctions::whichPlayer(temp[i][j]->getType()) == BLACK_PLAYER) {
 				newInstruction[ZERO] = (char)(j + STARTOF_TYPE_P2);
 				newInstruction[ONE] = (char)((ENDOF_LINE - i) + STARTOF_LENGTH_CHAR);
-				if (temp[ENDOF_LINE - newInstruction[SECOND] + STARTOF_LENGTH_CHAR][newInstruction[FIRST] - STARTOF_TYPE_P2]->moveFormat(newInstruction) && !(temp[ENDOF_LINE - newInstruction[SECOND] + STARTOF_LENGTH_CHAR][newInstruction[FIRST] - STARTOF_TYPE_P2]->hasSkippedPlayers(newInstruction, temp))) { /* checks if the piece threatens the king */ return true; }
+				if (temp[ENDOF_LINE - newInstruction[FORTH] + STARTOF_LENGTH_CHAR][newInstruction[THIRD] - STARTOF_TYPE_P2]->getType() != BLANK) {
+					_isPlayerDst = true;
+				}
+				else {
+					_isPlayerDst = false;
+				}
+				if (temp[ENDOF_LINE - newInstruction[SECOND] + STARTOF_LENGTH_CHAR][newInstruction[FIRST] - STARTOF_TYPE_P2]->moveFormat(newInstruction, _isPlayerDst, _currPlayer) && !(temp[ENDOF_LINE - newInstruction[SECOND] + STARTOF_LENGTH_CHAR][newInstruction[FIRST] - STARTOF_TYPE_P2]->hasSkippedPlayers(newInstruction, temp))) {
+					_isPlayerDst = tempIsPlayer;
+					/* checks if the piece threatens the king */
+					return true; 
+				}
 			}
 		}
 	}
+	_isPlayerDst = tempIsPlayer;
 	return false;
+}
+
+void Board::setIsPlayerDst() {
+	if (_pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]->getType() != BLANK) {
+		_isPlayerDst = true;
+	}
+	else {
+		_isPlayerDst = false;
+	}
 }

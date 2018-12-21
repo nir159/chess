@@ -4,13 +4,24 @@
 /*
 function will construct an Pawn object
 input:
-	color - indicator for field value of type to set
+	type - field value of type to set
 */
-Pawn::Pawn(bool color) : Piece::Piece('p') { // if color is false then set _type to White Piece
-	if (color) { this->_type = 'P'; } // else if color is true set _type to Black Piece
+Pawn::Pawn(char type) : Piece::Piece(type) { // set _type value by Parameter
 }
-
 
 Pawn::~Pawn()
 {
+}
+
+/*
+function will check if Instruction is valid for current type of piece
+Input:
+	instruction - Instruction to check
+Output:
+	if Instruction is valid for current type of piece then return true, else return false
+*/
+bool Pawn::moveFormat(std::string instruction)
+{
+	if (instruction[FORTH] - instruction[SECOND] == ONE) { return true; }
+	return false;
 }

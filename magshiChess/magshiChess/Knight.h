@@ -4,7 +4,7 @@ class Knight :
 	public Piece
 {
 public:
-	Knight(bool color);
+	Knight(char type);
 	~Knight();
 };
 

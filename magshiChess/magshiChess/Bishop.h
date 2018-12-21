@@ -4,7 +4,7 @@ class Bishop :
 	public Piece
 {
 public:
-	Bishop(bool color);
+	Bishop(char type);
 	~Bishop();
 };
 

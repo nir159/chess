@@ -138,6 +138,8 @@ Output:
 */
 bool Board::isReachable() {
 	if (_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2]->moveFormat(_instruction) && !(_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2]->hasSkippedPlayers(_instruction, _pieces))) {
+		_pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]->setType('#');
+		switchPieces(_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2], _pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]);
 		return true;
 	}
 	return false;
@@ -207,24 +209,59 @@ void Board::switchIsChess() {
 
 bool Board::isSelfChess() {
 	int i = 0, j = 0;
+	Piece* tempPiece;
+	std::string newInstruction = "";
 	Piece *temp[ENDOF_LENGTH][ENDOF_LENGTH];
 	for (i = 0; i < ENDOF_LENGTH; i++) {
 		for (j = 0; j < ENDOF_LENGTH; j++) {
-			temp[i][j] = _pieces[i][j];
+			switch (_pieces[i][j]->getType()) {
+			case 'R':
+			case 'r':
+				temp[i][j] = new Rook(_pieces[i][j]->getType());
+				break;
+			case 'K':
+			case 'k':
+				temp[i][j] = new King(_pieces[i][j]->getType());
+				break;
+			default:
+				temp[i][j] = new Blank();
+			}
 		}
 	}
 
+	temp[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]->setType('#');
+	tempPiece = temp[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2];
+	temp[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2] = temp[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2];
+	temp[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2] = tempPiece;
 	for (i = 0; i < ENDOF_LENGTH; i++) {
 		for (j = 0; j < ENDOF_LENGTH; j++) {
-			if (_currPlayer == BLACK_PLAYER && SideFunctions::whichPlayer(_pieces[i][j]->getType()) == WHITE_PLAYER) {
-
+			if (_currPlayer == BLACK_PLAYER && temp[i][j]->getType() == BLACK_KING) {
+				newInstruction += _instruction[THIRD];
+				newInstruction += _instruction[FORTH];
+				newInstruction += (char)(j + STARTOF_TYPE_P2);
+				newInstruction += (char)((ENDOF_LINE - i) + STARTOF_LENGTH_CHAR);
 			}
-			else if (_currPlayer == WHITE_PLAYER && SideFunctions::whichPlayer(_pieces[i][j]->getType()) == BLACK_PLAYER) {
-
+			if (_currPlayer == WHITE_PLAYER && temp[i][j]->getType() == WHITE_KING) {
+				newInstruction += _instruction[THIRD];
+				newInstruction += _instruction[FORTH];
+				newInstruction += (char)(j + STARTOF_TYPE_P2);
+				newInstruction += (char)((ENDOF_LINE - i) + STARTOF_LENGTH_CHAR);
 			}
 		}
 	}
-	_pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]->setType('#');
-	switchPieces(_pieces[ENDOF_LINE - _instruction[SECOND] + STARTOF_LENGTH_CHAR][_instruction[FIRST] - STARTOF_TYPE_P2], _pieces[ENDOF_LINE - _instruction[FORTH] + STARTOF_LENGTH_CHAR][_instruction[THIRD] - STARTOF_TYPE_P2]);
+	for (i = 0; i < ENDOF_LENGTH; i++) {
+		for (j = 0; j < ENDOF_LENGTH; j++) {
+			if (_currPlayer == BLACK_PLAYER && SideFunctions::whichPlayer(temp[i][j]->getType()) == WHITE_PLAYER) {
+				newInstruction[ZERO] = (char)(j + STARTOF_TYPE_P2);
+				newInstruction[ONE] = (char)((ENDOF_LINE - i) + STARTOF_LENGTH_CHAR);
+				if (temp[ENDOF_LINE - newInstruction[SECOND] + STARTOF_LENGTH_CHAR][newInstruction[FIRST] - STARTOF_TYPE_P2]->moveFormat(newInstruction) && !(temp[ENDOF_LINE - newInstruction[SECOND] + STARTOF_LENGTH_CHAR][newInstruction[FIRST] - STARTOF_TYPE_P2]->hasSkippedPlayers(newInstruction, temp))) { /* checks if the piece threatens the king */ return true; }
+			}
+			else if (_currPlayer == WHITE_PLAYER && SideFunctions::whichPlayer(temp[i][j]->getType()) == BLACK_PLAYER) {
+				newInstruction[ZERO] = (char)(j + STARTOF_TYPE_P2);
+				newInstruction[ONE] = (char)((ENDOF_LINE - i) + STARTOF_LENGTH_CHAR);
+				if (temp[ENDOF_LINE - newInstruction[SECOND] + STARTOF_LENGTH_CHAR][newInstruction[FIRST] - STARTOF_TYPE_P2]->moveFormat(newInstruction) && !(temp[ENDOF_LINE - newInstruction[SECOND] + STARTOF_LENGTH_CHAR][newInstruction[FIRST] - STARTOF_TYPE_P2]->hasSkippedPlayers(newInstruction, temp))) { /* checks if the piece threatens the king */ return true; }
+			}
+		}
+	}
 	return false;
 }

@@ -44,34 +44,32 @@ void main()
 
 	while (msgFromGraphics != "quit")
 	{
-		// should handle the string the sent from graphics
-		// according the protocol. Ex: e2e4           (move e2 to e4)
 		game.setInstruction(msgFromGraphics);
 		game.setIsPlayerDst();
-		if (!game.pieceExists()) {
+		if (!game.pieceExists()) { // if piece does not exist
 			strcpy_s(msgToGraphics, "2");
 		}
-		else if (!game.isPiece()) {
+		else if (!game.isPiece()) { // if piece of the current player exist
 			strcpy_s(msgToGraphics, "3");
 		}
-		else if (game.isSelfChess()) {
+		else if (game.isSelfChess()) { // if move will cause chess to current player
 			strcpy_s(msgToGraphics, "4");
 		}
-		else if (!game.isValidRange()) {
+		else if (!game.isValidRange()) { // if move is not in the range
 			strcpy_s(msgToGraphics, "5");
 		}
-		else if (game.isSame()) {
+		else if (game.isSame()) { // if destination is the same as source
 			strcpy_s(msgToGraphics, "7");
 		}
-		else if (!game.isReachable()) {
+		else if (!game.isReachable()) { // if the destination is not reachable
 			strcpy_s(msgToGraphics, "6");
 		}
 		else {
 			strcpy_s(msgToGraphics, "0");
-			if (game.isChess()) {
+			if (game.isChess()) { // if the move caused chess to the other player
 				strcpy_s(msgToGraphics, "1");
 			}
-			game.setPlayer(SideFunctions::changePlayer(game.getPlayer()));
+			game.setPlayer(SideFunctions::changePlayer(game.getPlayer())); // after the move was made changes the current player
 		}
 
 

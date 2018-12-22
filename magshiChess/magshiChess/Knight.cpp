@@ -15,8 +15,8 @@ Knight::~Knight()
 }
 
 bool Knight::moveFormat(std::string instruction, bool isPlayerDst, int currTurn) {
-	if ((instruction[SECOND] - instruction[FORTH] == TWO || instruction[FORTH] - instruction[SECOND] == TWO) && (instruction[FIRST] - instruction[THIRD] == ONE || instruction[THIRD] - instruction[FIRST] == ONE)) { return true; }
-	else if ((instruction[SECOND] - instruction[FORTH] == ONE || instruction[FORTH] - instruction[SECOND] == ONE) && (instruction[FIRST] - instruction[THIRD] == TWO || instruction[THIRD] - instruction[FIRST] == TWO)) { return true; }
+	if (abs(instruction[SECOND] - instruction[FORTH]) == TWO && abs(instruction[FIRST] - instruction[THIRD]) == ONE) { return true; }
+	else if (abs(instruction[SECOND] - instruction[FORTH]) == ONE && abs(instruction[FIRST] - instruction[THIRD]) == TWO) { return true; }
 	return false;
 }
 

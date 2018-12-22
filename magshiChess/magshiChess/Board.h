@@ -7,6 +7,9 @@
 #include "King.h"
 #include "Blank.h"
 #include "Pawn.h"
+#include "Knight.h"
+#include "Bishop.h"
+#include "Queen.h"
 
 class Board
 {

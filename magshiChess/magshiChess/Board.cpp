@@ -23,6 +23,18 @@ Board::Board(std::string gameBoard) : _currPlayer(BLACK_PLAYER), _instruction(""
 				case 'p':
 					_pieces[i][j] = new Pawn(gameBoard[last]);
 					break;
+				case 'N':
+				case 'n':
+					_pieces[i][j] = new Knight(gameBoard[last]);
+					break;
+				case 'B':
+				case 'b':
+					_pieces[i][j] = new Bishop(gameBoard[last]);
+					break;
+				case 'Q':
+				case 'q':
+					_pieces[i][j] = new Queen(gameBoard[last]);
+					break;
 				default:
 					_pieces[i][j] = new Blank();
 			}
@@ -235,6 +247,18 @@ bool Board::isSelfChess() {
 			case 'P':
 			case 'p':
 				temp[i][j] = new Pawn(_pieces[i][j]->getType());
+				break;
+			case 'N':
+			case 'n':
+				temp[i][j] = new Knight(_pieces[i][j]->getType());
+				break;
+			case 'B':
+			case 'b':
+				temp[i][j] = new Bishop(_pieces[i][j]->getType());
+				break;
+			case 'Q':
+			case 'q':
+				temp[i][j] = new Queen(_pieces[i][j]->getType());
 				break;
 			default:
 				temp[i][j] = new Blank();

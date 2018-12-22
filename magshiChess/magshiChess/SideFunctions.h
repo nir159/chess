@@ -6,6 +6,9 @@
 #define ZERO 0
 #define ONE 1
 #define TWO 2
+#define THREE 3
+#define FOUR 4
+#define SIX 6
 
 #define BLANK_PLAYER 0
 #define BLACK_PLAYER 1
@@ -27,6 +30,8 @@
 #define WHITE_KING 'K'
 #define BLACK_PAWN 'p'
 #define WHITE_PAWN 'P'
+#define ROOK 'r'
+#define BISHOP 'b'
 
 #define INSTRUCTION_LEN 4
 #define PIECES_PER_PLAYER 16

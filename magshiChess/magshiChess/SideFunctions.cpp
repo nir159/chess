@@ -34,8 +34,7 @@ Output:
 	if player 2 is controling the recieved piece, return 2
 	if none of the players are controling the recieved piece, return 0
 */
-int SideFunctions::whichPlayer(const char width)
-{
+int SideFunctions::whichPlayer(const char width) {
 	if (STARTOF_TYPE_P1 < width && width < ENDOF_TYPE_P1) { return WHITE_PLAYER; }
 	else if (STARTOF_TYPE_P2 < width && width < ENDOF_TYPE_P2) { return BLACK_PLAYER; }
 	else { return BLANK_PLAYER; }

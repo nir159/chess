@@ -1,5 +1,3 @@
-## TODO
+# MagshiChess
 
-- Exceptions
-- Input Checks
-	- Player Check
+## Daniel Zigler & Nir Yosef
